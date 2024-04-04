@@ -1,5 +1,6 @@
-import React from "react";
-import './Register.css';
+import React from "react"
+import './Register.css'
+import { Link } from "react-router-dom"
 const Register = () => {
   return (
     <div className="register">
@@ -20,7 +21,7 @@ const Register = () => {
             <label htmlFor ="Contraseña"> Contraseña </label>
             <input type= "password" name="Contraseña" required/>
 
-            <a href="/Login">Login</a>
+            <Link to="/login">Login</Link>
 
             <button type="submit"> Registrar </button>
             

@@ -1,5 +1,6 @@
-import React from "react";
-import './Login.css';
+import React from "react"
+import './Login.css'
+import { Link } from 'react-router-dom'
 const Login = () => {
   return (
     <div className="login">
@@ -9,8 +10,8 @@ const Login = () => {
             <input type = "text" name="Usuario" required></input>
             <label htmlFor ="Contraseña"> Contraseña </label>
             <input type= "password" name="Contraseña" required/>
-
-            <a href="/Register">Registrarme</a>
+           
+            <Link to="/register">Registrarme</Link>
 
             <button type="submit"> Login </button>
             
