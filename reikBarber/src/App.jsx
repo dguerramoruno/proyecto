@@ -6,6 +6,7 @@ import Footer from './components/footer/Footer'
 import Cookies from './components/cookies/Cookies'
 import Login from './components/login/Login'
 import Register from './components/register/Register'
+import Reservar from './components/reservar/Reservar'
 import './App.css'
 import Inicio from './components/inicio/Inicio'
 import Contactanos from './components/contacto/Contactanos'
@@ -22,7 +23,7 @@ function App() {
               <Route path="/login" element={<Login/>} />
               <Route path="/register" element={<Register/>} />
               <Route path="/inicio" element={<Inicio/>} />
-            
+              <Route path="/reservar" element={<Reservar/>} />
               <Route path="/contactanos" element={<Contactanos/>} />
               <Route path="/cookies" element={<Cookies/>} />
               
