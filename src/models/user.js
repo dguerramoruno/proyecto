@@ -1,12 +1,4 @@
-const mysql = require('mysql');
-
-const connection = mysql.createConnection({
-    host: '127.0.0.1',
-    user: 'cfgs',
-    password: 'ira491',
-    database: 'barber'
-});
-
+const connection = require('../utils/database')
 class User {
     constructor(username, email, password) {
         this.username = username;
