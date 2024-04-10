@@ -17,9 +17,9 @@ const Reservar = () => {
     // Aquí deberías hacer una solicitud al backend para obtener las horas disponibles
     // Supongamos que recibimos las horas disponibles en este formato:
     const fetchedAvailableHours = [
-      { day: 1, start: "10:00", end: "20:30" }, // Lunes
-      { day: 2, start: "10:00", end: "20:30" }, // Martes
-      { day: 3, start: "10:00", end: "20:30" }, // Miércoles
+      { day: 1, start: "16:00", end: "20:30" }, // Lunes
+      { day: 2, start: "16:00", end: "20:30" }, // Martes
+      { day: 3, start: "16:00", end: "20:30" }, // Miércoles
       { day: 4, start: "10:00", end: "20:30" }, // Jueves
       { day: 5, start: "10:00", end: "20:30" }, // Viernes
       { day: 6, start: "10:00", end: "19:30" }  // Sábado
