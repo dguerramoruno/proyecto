@@ -1,5 +1,32 @@
-.custom-calendar .react-datepicker__time-container {
-    position: relative;
-    top: 10px; /* Ajusta la posición vertical de las horas */
-  }
-  
+
+.react-datepicker{
+  width: "1000px";
+  height: "1200px";
+}
+
+
+/* Cambia el color de fondo del calendario */
+.react-datepicker__month-container {
+  background-color: #E0EDEE; 
+}
+
+
+
+/* Cambia el color de fondo del día seleccionado */
+.react-datepicker__day--selected {
+  background-color: #347377; 
+  color: #ffffff; 
+}
+
+/* Cambia el color de fondo de los días disponibles */
+.react-datepicker__day--available {
+  background-color: #4caf50; 
+  color: #ffffff; 
+}
+.react-datepicker__header {
+  background-color: #84AFBF; /* Cambia el color de fondo según tus preferencias */
+  color: #ffffff; /* Cambia el color del texto según tus preferencias */
+}
+.react-datepicker__time-container .react-datepicker__time .react-datepicker__time-box ul.react-datepicker__time-list li {
+  background-color: #E0EDEE; /* Cambia el color de fondo según tus preferencias */
+}

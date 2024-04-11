@@ -31,12 +31,19 @@ const Reservar = () => {
     setSelectedDate(date);
   };
 
+  const filterDate = date => {
+    const selectedDay = date.getDay();
+    return selectedDay !== 0; // Devuelve false si es domingo (deshabilita la fecha)
+  };
+
   const filterTime = time => {
     if (!selectedDate) return false;
-    const selectedDay = selectedDate.getDay(); 
+    
+    const selectedDay = selectedDate.getDay();
     const selectedTime = time.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }); 
 
-    // Verificar si la hora seleccionada está dentro del rango de horas disponibles para el día seleccionado
+    if (selectedDay === 0) return false; // Deshabilitar selección si es domingo
+
     const dayHours = availableHours.find(hour => hour.day === selectedDay);
     if (!dayHours) return false;
     const startTime = new Date(`1970-01-01T${dayHours.start}`);
@@ -47,20 +54,22 @@ const Reservar = () => {
 
   return (
     <div className="container">
-      <h3>Selecciona una fecha y hora :</h3>
-      <DatePicker
-        selected={selectedDate}
-        onChange={handleDateChange}
-        dateFormat="dd/MM/yyyy HH:mm"
-        inline 
-        showTimeSelect 
-        timeFormat="HH:mm"
-        timeIntervals={30} 
-        filterTime={filterTime}
-      />
+      <div className="container">
+        <h3>Selecciona una fecha y hora:</h3>
+        <DatePicker
+          selected={selectedDate}
+          onChange={handleDateChange}
+          dateFormat="dd/MM/yyyy HH:mm"
+          inline 
+          showTimeSelect 
+          timeFormat="HH:mm"
+          timeIntervals={30} 
+          filterDate={filterDate}
+          filterTime={filterTime}
+        />
+      </div>
     </div>
   );
 };
 
 export default Reservar;
-
