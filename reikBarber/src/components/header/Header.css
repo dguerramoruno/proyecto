@@ -33,4 +33,23 @@
   .menu li a:hover {
     color:  rgb(45, 104, 231);
   }
+ 
+  .login-link {
+    position: absolute;
+    right: 10%;
+    top:10%;
+   
+    
+  }
+
+  .login-icon{
+    display: flex;
+    align-items: center;
+    margin-left: 1rem;
+    width: 20vh;
+  }
+  .login-text{
+    margin-left: 1rem;
+  }
   
+ 
