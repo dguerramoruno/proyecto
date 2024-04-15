@@ -1,12 +1,13 @@
-const http  = require('node:http')
 const express = require('express');
+const bodyParser = require('body-parser');
+
 const app = express();
-const userRoutes = require('./routes/userRoutes')
-const reservationRoutes = require('./routes/reservationRoutes')
 
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
-const desiredPort = porcess.env.PORT ?? 1234
+// Resto de la configuración de tu aplicación
 
-const server = http.createServer((req,res) => {
-    res.end('Hola mundo')
-})
+app.listen(3000, () => {
+  console.log('Servidor escuchando en el puerto 3000');
+});
