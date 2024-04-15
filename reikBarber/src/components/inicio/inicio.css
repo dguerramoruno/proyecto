@@ -1,0 +1,56 @@
+.imagenes {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%; /* Ajusta el ancho según sea necesario */
+    height: 100%; /* Ajusta la altura según sea necesario */
+  }
+  
+  /* Estilo para que la imagen no enfocada se vea detrás */
+  .carousel .slide {
+    width: 25%; /* Ajusta el ancho del carrusel según sea necesario */
+    height: 25%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  /* Estilo para la contenedor de la imagen */
+  .carousel .slide > div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 25%;
+    height: 25%;
+  }
+  
+  /* Estilo para la imagen */
+  .carousel .slide img {
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    border-radius: 5%;
+  }
+
+/* Estilo para los botones de navegación (flechas) del carrusel */
+.carousel .control-prev, .carousel .control-next {
+    border-radius: 50%; /* Hace que los botones sean redondos */
+    width: 0px; /* Ajusta el ancho de los botones según sea necesario */
+    height: 0px; /* Ajusta la altura de los botones según sea necesario */
+    background-color: rgba(0, 0, 0, 0.5); /* Cambia el color de fondo de los botones */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  /* Estilo para los botones de navegación (flechas) del carrusel al pasar el ratón por encima */
+  .carousel .control-prev:hover, .carousel .control-next:hover {
+    background-color: rgba(0, 0, 0, 0.7); /* Cambia el color de fondo de los botones al pasar el ratón por encima */
+  }
+  
+  button {
+    margin-top: 20px; /* Ajusta el margen superior según sea necesario */
+    /* Agrega otros estilos según lo desees */
+  }
+  

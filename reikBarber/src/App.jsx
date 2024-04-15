@@ -10,6 +10,7 @@ import Reservar from './components/reservar/Reservar'
 import './App.css'
 import Inicio from './components/inicio/Inicio'
 import Contactanos from './components/contacto/Contactanos'
+import fondo from "./assets/fondoo.webp";
 
 function App() {
   // Aquí puedes usar useState si necesitas algún estado en tu aplicación
