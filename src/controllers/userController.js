@@ -1,9 +1,10 @@
 const User = require("../models/user");
 const db = require('../utils/database');
+
 const createUser = (req, res) => {
   const { username, email, password } = req.body;
   const newUser = new User(username, email, password);
-
+  console.log(req.body);
   newUser.save((err) => {
     if (err) {
       console.error("Error al crear usuario:", err);

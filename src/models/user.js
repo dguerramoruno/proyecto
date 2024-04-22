@@ -7,7 +7,7 @@ class User {
     }
 
     save() {
-        connection.query('INSERT INTO users (username, email, password) VALUES (?, ?, ?)', [this.username, this.email, this.password], (error, results, fields) => {
+        connection.query('INSERT INTO users (name, email, password) VALUES (?, ?, ?)', [this.username, this.email, this.password], (error, results, fields) => {
             if (error) {
                 console.log("Error al crear usuarios:", error);
                 return;
