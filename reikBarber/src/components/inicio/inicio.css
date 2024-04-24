@@ -53,4 +53,13 @@
     margin-top: 20px; /* Ajusta el margen superior según sea necesario */
     /* Agrega otros estilos según lo desees */
   }
+
+  #mapa {
+    width: 40vh;
+    height: 40vh;
+    border-radius: 15px; /* Esto redondeará las esquinas del mapa */
+  overflow: hidden;
+  margin:auto;
+  margin-top: 5vh;
+  }
   
