@@ -2,8 +2,8 @@ const { request, response } = require('express')
 const Reservation = require('../models/reservation')
 
 const createReservation = (request, response) => {
-  const { userId, date, service, stylist } = request.body;
-  const newReservation = new Reservation(userId, date, service, stylist);
+  const { day, hour, client_id, barber_id } = request.body;
+  const newReservation = new Reservation(day, hour, client_id, barber_id);
 
   newReservation.save((err) => {
     if (err) {

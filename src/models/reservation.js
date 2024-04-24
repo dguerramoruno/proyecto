@@ -2,16 +2,16 @@ const connection = require("../utils/database");
 connection.ping();
 
 class Reservation {
-  constructor(userId, date, service, stylist) {
-    this.userId = userId;
-    this.date = date;
-    this.service = service;
-    this.stylist = stylist;
+  constructor(day, hour, client_id, barber_id) {
+    this.day = day;
+    this.hour = hour;
+    this.client_id = client_id;
+    this.barber_id = barber_id;
   }
 
   save() {
     connection.query(
-      "INSERT INTO reservations (user_id,date,service,stylist) VALUES ( ? ? ? ? )",
+      "INSERT INTO reservations (day,hour,client_id,barber_id) VALUES ( ? ? ? ? )",
       [this.userId, this.date, this.service, this.stylist],
       (error, results, fields) => {
         if (error) {
