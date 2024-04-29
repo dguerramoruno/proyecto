@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.0.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
--- Servidor: localhost
--- Temps de generació: 08-04-2024 a les 19:43:52
--- Versió del servidor: 10.1.32-MariaDB
--- Versió de PHP: 7.2.5
+-- Servidor: 127.0.0.1
+-- Tiempo de generación: 29-04-2024 a las 15:54:21
+-- Versión del servidor: 10.4.27-MariaDB
+-- Versión de PHP: 8.2.0
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -19,13 +18,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de dades: `barber`
+-- Base de datos: `barber`
 --
 
 -- --------------------------------------------------------
 
 --
--- Estructura de la taula `reservations`
+-- Estructura de tabla para la tabla `reservations`
 --
 
 CREATE TABLE `reservations` (
@@ -34,12 +33,12 @@ CREATE TABLE `reservations` (
   `hour` time NOT NULL,
   `client_id` int(11) DEFAULT NULL,
   `barber_id` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estructura de la taula `users`
+-- Estructura de tabla para la tabla `users`
 --
 
 CREATE TABLE `users` (
@@ -47,15 +46,26 @@ CREATE TABLE `users` (
   `name` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
   `phone_number` varchar(20) DEFAULT NULL,
-  `role` enum('client','barber') NOT NULL DEFAULT 'client'
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `role` enum('client','barber') NOT NULL DEFAULT 'client',
+  `username` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
--- Índexs per a les taules bolcades
+-- Volcado de datos para la tabla `users`
+--
+
+INSERT INTO `users` (`id`, `name`, `email`, `phone_number`, `role`, `username`, `password`) VALUES
+(1, 'David Guerra', 'dguerramoruno@gmail.com', '605930289', 'client', 'dguerra', 'Marianao123'),
+(2, 'Pau tienda', 'pautiendapfi@gmail.com', '605930289', 'client', 'pautienda', 'Marianao123'),
+(4, 'Javi', 'javi@gmail.com', '605498234', 'client', 'javi', 'Marianao123');
+
+--
+-- Índices para tablas volcadas
 --
 
 --
--- Índexs per a la taula `reservations`
+-- Indices de la tabla `reservations`
 --
 ALTER TABLE `reservations`
   ADD PRIMARY KEY (`id`),
@@ -63,34 +73,34 @@ ALTER TABLE `reservations`
   ADD KEY `barber_id` (`barber_id`);
 
 --
--- Índexs per a la taula `users`
+-- Indices de la tabla `users`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `email` (`email`);
 
 --
--- AUTO_INCREMENT per les taules bolcades
+-- AUTO_INCREMENT de las tablas volcadas
 --
 
 --
--- AUTO_INCREMENT per la taula `reservations`
+-- AUTO_INCREMENT de la tabla `reservations`
 --
 ALTER TABLE `reservations`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT per la taula `users`
+-- AUTO_INCREMENT de la tabla `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- Restriccions per a les taules bolcades
+-- Restricciones para tablas volcadas
 --
 
 --
--- Restriccions per a la taula `reservations`
+-- Filtros para la tabla `reservations`
 --
 ALTER TABLE `reservations`
   ADD CONSTRAINT `reservations_ibfk_1` FOREIGN KEY (`client_id`) REFERENCES `users` (`id`),
