@@ -2,17 +2,34 @@ const User = require("../models/user");
 const db = require('../utils/database');
 
 const createUser = (req, res) => {
-  const { username, email, password } = req.body;
-  const newUser = new User(username, email, password);
-  console.log(req.body);
+  const { username, email,phone,name, password } = req.body;
+  const newUser = new User(username, email,phone,name, password);
+  console.log(username,email,phone,name,password)
   newUser.save((err) => {
     if (err) {
       console.error("Error al crear usuario:", err);
       return res.status(500).json({ message: "Error al crear usuario" });
     }
     res.status(201).json({ message: "Usuario creado exitosamente" });
+  }); 
+};
+const login = (req, res) => {
+  const { username, password } = req.body;
+
+  User.authenticate(username, password, (err, user) => {
+    if (err) {
+      console.error("Error al autenticar usuario:", err);
+      return res.status(500).json({ message: "Error al autenticar usuario" });
+    }
+    if (!user) {
+      return res.status(401).json({ message: "Nombre de usuario o contraseña incorrectos" });
+    }
+    
+    res.status(200).json({ user });
   });
 };
+
+
 const getUserById = (req, res) => {
   const userId = req.params.id;
 
@@ -41,4 +58,4 @@ const getAllUsers = (req, res) => {
     res.status(200).json({ users: result });
   });
 };
-module.exports = { createUser, getUserById, getAllUsers };
+module.exports = { createUser, getUserById, getAllUsers,login };
