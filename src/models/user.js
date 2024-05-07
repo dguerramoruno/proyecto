@@ -1,4 +1,6 @@
 const connection = require('../utils/database')
+const bcrypt = require('bcrypt');
+
 class User {
     constructor(username, email,phone,name,password) {
         this.username = username;
