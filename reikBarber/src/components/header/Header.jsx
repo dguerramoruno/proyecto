@@ -26,7 +26,9 @@ const Header = () => {
       </div>
       <nav>
         <ul className="menu">
-          <li><Link to="/inicio">Inicio</Link></li>
+          <li><Link to="/inicio">Inicio</Link></li>          
+          <li><Link to="/reservar">Reservar</Link></li>
+          <li><Link to="/misReservas">Mis reservas</Link></li>
           <li><Link to="/contactanos">Contáctanos</Link></li>
           {isAuthenticated ? (
             <li className="login-link">

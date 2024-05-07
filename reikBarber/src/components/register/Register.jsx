@@ -19,12 +19,26 @@ const Register = () => {
     // Validaciones
     const newErrors = {};
 
+    if (values.name.length < 6) {
+      newErrors.name = "El nombre y apellido debe tener al menos 6 caracteres";
+    }
+
+    if (values.username.length < 4) {
+      newErrors.username = "El nombre de usuario debe tener al menos 4 caracteres";
+    }
+
     if (!values.email.includes("@")) {
       newErrors.email = "Email no válido";
     }
 
+    if (values.phone.length !== 10 || !/^\d+$/.test(values.phone)) {
+      newErrors.phone = "Número de teléfono inválido";
+    }
+
     if (values.password.length < 6) {
       newErrors.password = "La contraseña debe tener al menos 6 caracteres";
+    } else if (!/(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{6,}/.test(values.password)) {
+      newErrors.password = "La contraseña debe contener al menos una letra minúscula, una letra mayúscula y un número";
     }
 
     // Actualizar estado de errores
@@ -51,6 +65,7 @@ const Register = () => {
         <div className="form-group">
           <label htmlFor="name"><FaUser /> Nombre y apellidos</label>
           <input id="name" type="text" name="name" required />
+          {errors.name && <span className="error-message">{errors.name}</span>}
         </div>
         <div className="form-group">
           <label htmlFor="email"><FaEnvelope /> Email</label>
@@ -60,10 +75,12 @@ const Register = () => {
         <div className="form-group">
           <label htmlFor="phone"><FaPhone /> Numero de teléfono</label>
           <input id="phone" type="text" name="phone" required />
+          {errors.phone && <span className="error-message">{errors.phone}</span>}
         </div>
         <div className="form-group">
           <label htmlFor="username"><FaUserAlt /> Usuario</label>
           <input id="username" type="text" name="username" required />
+          {errors.username && <span className="error-message">{errors.username}</span>}
         </div>
         <div className="form-group">
           <label htmlFor="password"><FaLock /> Contraseña</label>

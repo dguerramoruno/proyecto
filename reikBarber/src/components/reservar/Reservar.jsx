@@ -67,7 +67,11 @@ const Reservar = () => {
           filterDate={filterDate}
           filterTime={filterTime}
         />
+        <div className="button-container">
+      <button>Reservar</button>
       </div>
+      </div>
+      
     </div>
   );
 };

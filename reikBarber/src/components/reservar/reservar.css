@@ -30,3 +30,20 @@
   background-color: #E0EDEE; /* Cambia el color de fondo según tus preferencias */
 }
 
+.button-container {
+  margin-top: 20px; /* Espacio entre el calendario y el botón */
+}
+
+.button-container button {
+  padding: 10px 20px; /* Espacio interno del botón */
+  background-color: #007bff; /* Color de fondo del botón */
+  color: #fff; /* Color del texto del botón */
+  border: none; /* Elimina el borde del botón */
+  border-radius: 5px; /* Borde redondeado del botón */
+  cursor: pointer; /* Cambia el cursor al pasar sobre el botón */
+  transition: background-color 0.3s ease; /* Transición suave del color de fondo */
+}
+
+.button-container button:hover {
+  background-color: #0056b3; /* Color de fondo del botón al pasar el cursor */
+}
