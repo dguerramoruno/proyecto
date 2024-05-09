@@ -1,4 +1,3 @@
-import React from "react";
 import { useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import Header from "./components/header/Header";
@@ -24,10 +23,9 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/inicio" element={<Inicio />} />
+          <Route path="/reservar" element={<Reservar />} />
           <Route element={<ProtectedRoute />}>
-            <Route path="/reservar" element={<Reservar />} />
           </Route>
-
           <Route path="/contactanos" element={<Contactanos />} />
           <Route path="/cookies" element={<Cookies />} />
         </Routes>
