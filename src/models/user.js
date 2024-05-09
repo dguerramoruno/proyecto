@@ -35,26 +35,29 @@ class User {
             callback(null, results);
         });
     }
-    static authenticate(username, password, callback) {
-        connection.query('SELECT * FROM users WHERE username = ?', [username], (error, results, fields) => {
-            if (error) {
-                console.error("Error al autenticar usuario:", error);
-                return callback(error, null);
-            }
-            if (results.length === 0) {
-                return callback(null, null, { message: "Nombre de usuario no encontrado" });
-            }
-            const user = results[0];
-            // Verificar la contraseña con bcrypt
-            bcrypt.compare(password, user.password, (err, isMatch) => {
-                if (err) {
-                    console.error("Error al comparar contraseñas:", err);
-                    return callback(err, null);
+    static authenticate(username, password) {
+        return new Promise((resolve, reject) => {
+            connection.query('SELECT * FROM users WHERE username = ?', [username], (error, results, fields) => {
+                if (error) {
+                    console.error("Error al autenticar usuario:", error);
+                    reject(error);
                 }
-                if (!isMatch) {
-                    return callback(null, null, { message: "Contraseña incorrecta" });
+                if (results.length === 0) {
+                    resolve({ success: false, message: "Nombre de usuario no encontrado" });
                 }
-                callback(null, user);
+                const user = results[0];
+                // Verificar la contraseña con bcrypt
+                bcrypt.compare(password, user.password, (err, isMatch) => {
+                    if (err) {
+                        console.error("Error al comparar contraseñas:", err);
+                        reject(err);
+                    }
+                    if (!isMatch) {
+                        resolve({ success: false, message: "Contraseña incorrecta" });
+                    }
+                    resolve({ success: true, user });
+                    console.log(user) 
+                });
             });
         });
     }

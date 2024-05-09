@@ -3,10 +3,15 @@ import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUserCircle } from '@fortawesome/free-solid-svg-icons';
 import logo from '../../assets/logo.png';
-import './Header.css';
+import './Header.css'
+import secureLocalStorage from 'react-secure-storage';
 
 const Header = () => {
   // Supongamos que isAuthenticated es un estado que indica si el usuario está autenticado
+  let user = secureLocalStorage.getItem("usuario");
+  if(user){
+    setIsAuthenticated(true)
+  }
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   // Supongamos que username es el nombre de usuario del usuario autenticado

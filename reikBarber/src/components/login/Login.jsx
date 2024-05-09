@@ -1,6 +1,9 @@
 import {useRef} from "react"
+import secureStorage from 'react-secure-storage';
 import './Login.css'
 import { Link } from 'react-router-dom'
+
+
 const Login = () => {
   const ref = useRef()
 
@@ -13,23 +16,36 @@ const Login = () => {
       values[key] = value
     }
     console.log(values)
-    const response = await fetch('http://localhost:3000/login', {
-      method: 'POST', 
-      headers:{
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(values), 
-    })
-  }
+    
+    
+      const response = await fetch('http://localhost:3000/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(values),
+      });
+      console.log("test")
+      if (response.ok) {
+        const data = await response.json();
+        const { usuario } = data; 
+        await secureStorage.setItem('usuario', usuario);
+        console.log("okkey")
+        
+      } else {
+        
+        console.error('Error al iniciar sesión');
+      }
+    } 
 
   return (
     <div className="login">
         <h2>Inicia sessión</h2>
         <form onSubmit={(e) => {e.preventDefault()}} ref={ref}>
-            <label htmlFor ="Usuario"> Usuario </label>
-            <input type = "text" name="Usuario" required></input>
-            <label htmlFor ="Contraseña"> Contraseña </label>
-            <input type= "password" name="Contraseña" required/>
+            <label htmlFor ="username"> Usuario </label>
+            <input type = "text" name="username" required></input>
+            <label htmlFor ="password"> Contraseña </label>
+            <input type= "password" name="password" required/>
            
             <Link to="/register">Registrarme</Link>
 
