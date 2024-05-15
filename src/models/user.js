@@ -35,28 +35,42 @@ class User {
             callback(null, results);
         });
     }
-    static authenticate(username, password, callback) {
-        connection.query('SELECT * FROM users WHERE username = ?', [username], (error, results, fields) => {
-            if (error) {
-                console.error("Error al autenticar usuario:", error);
-                return callback(error, null);
-            }
-            if (results.length === 0) {
-                return callback(null, null, { message: "Nombre de usuario no encontrado" });
-            }
-            const user = results[0];
-            // Verificar la contraseña con bcrypt
-            bcrypt.compare(password, user.password, (err, isMatch) => {
-                if (err) {
-                    console.error("Error al comparar contraseñas:", err);
-                    return callback(err, null);
-                }
-                if (!isMatch) {
-                    return callback(null, null, { message: "Contraseña incorrecta" });
-                }
-                callback(null, user);
-            });
-        });
+
+    static async authenticate(username, password) {
+
+        try {
+
+            const queryPromise = new Promise((resolve, reject) => {
+                connection.query('SELECT * FROM users WHERE username = ?', [username], (error, results, fields) => {
+                    if (error) reject('error')
+                    if (results.length === 0) reject('error')
+                    
+                    const [user] = results
+
+                    resolve(user)
+                })
+            })
+
+            const user = await queryPromise
+
+            const passwordPromise = new Promise((resolve, reject) => {
+                bcrypt.compare(password, user.password, (err, match) => {
+                    if (err) reject('error')
+                    if (!match) reject('error')
+
+                    resolve(true)
+                })
+            })
+
+            const match = await passwordPromise
+
+            if (match) return user
+
+            throw new Error('error')
+
+        } catch(err) {
+            return null
+        }
     }
 
     static findById(id, callback) {
