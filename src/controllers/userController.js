@@ -13,20 +13,22 @@ const createUser = (req, res) => {
     res.status(201).json({ message: "Usuario creado exitosamente" });
   }); 
 };
-const login = (req, res) => {
-  const { username, password } = req.body;
+const login = async (req, res) => {
 
-  User.authenticate(username, password, (err, user) => {
-    if (err) {
-      console.error("Error al autenticar usuario:", err);
-      return res.status(500).json({ message: "Error al autenticar usuario" });
-    }
+  try {
+    const { username, password } = req.body;
+    const user = await User.authenticate(username, password)
+
     if (!user) {
       return res.status(401).json({ message: "Nombre de usuario o contraseña incorrectos" });
     }
-    
-    res.status(200).json({ user });
-  });
+
+    res.status(200).json({user});
+  } catch(err) {
+    console.error("Error al autenticar usuario:", err);
+      return res.status(500).json({ message: "Error al autenticar usuario" });
+  }
+
 };
 
 
