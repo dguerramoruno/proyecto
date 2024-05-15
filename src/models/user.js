@@ -35,31 +35,42 @@ class User {
             callback(null, results);
         });
     }
-    static authenticate(username, password) {
-        return new Promise((resolve, reject) => {
-            connection.query('SELECT * FROM users WHERE username = ?', [username], (error, results, fields) => {
-                if (error) {
-                    console.error("Error al autenticar usuario:", error);
-                    reject(error);
-                }
-                if (results.length === 0) {
-                    resolve({ success: false, message: "Nombre de usuario no encontrado" });
-                }
-                const user = results[0];
-                // Verificar la contraseña con bcrypt
-                bcrypt.compare(password, user.password, (err, isMatch) => {
-                    if (err) {
-                        console.error("Error al comparar contraseñas:", err);
-                        reject(err);
-                    }
-                    if (!isMatch) {
-                        resolve({ success: false, message: "Contraseña incorrecta" });
-                    }
-                    resolve({ success: true, user });
-                    console.log(user) 
-                });
-            });
-        });
+
+    static async authenticate(username, password) {
+
+        try {
+
+            const queryPromise = new Promise((resolve, reject) => {
+                connection.query('SELECT * FROM users WHERE username = ?', [username], (error, results, fields) => {
+                    if (error) reject('error')
+                    if (results.length === 0) reject('error')
+                    
+                    const [user] = results
+
+                    resolve(user)
+                })
+            })
+
+            const user = await queryPromise
+
+            const passwordPromise = new Promise((resolve, reject) => {
+                bcrypt.compare(password, user.password, (err, match) => {
+                    if (err) reject('error')
+                    if (!match) reject('error')
+
+                    resolve(true)
+                })
+            })
+
+            const match = await passwordPromise
+
+            if (match) return user
+
+            throw new Error('error')
+
+        } catch(err) {
+            return null
+        }
     }
 
     static findById(id, callback) {

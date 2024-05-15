@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState,useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUserCircle } from '@fortawesome/free-solid-svg-icons';
@@ -7,21 +7,21 @@ import './Header.css'
 import secureLocalStorage from 'react-secure-storage';
 
 const Header = () => {
-  // Supongamos que isAuthenticated es un estado que indica si el usuario está autenticado
-  let user = secureLocalStorage.getItem("usuario");
-  if(user){
-    setIsAuthenticated(true)
-  }
+  
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-
-  // Supongamos que username es el nombre de usuario del usuario autenticado
   const [username, setUsername] = useState('');
-
-  // Función para manejar el cierre de sesión
+  useEffect(() => {
+    let user = secureLocalStorage.getItem("user");
+    if(user){
+      setIsAuthenticated(true)
+    }
+  },[isAuthenticated])
+  
   const handleLogout = () => {
-    // Aquí iría la lógica para cerrar la sesión
+    secureLocalStorage.removeItem("user")
     setIsAuthenticated(false);
     setUsername('');
+    
   };
 
   return (
