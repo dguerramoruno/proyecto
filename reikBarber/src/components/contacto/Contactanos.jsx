@@ -14,7 +14,7 @@ const contactanos = () => {
     // También puedes reiniciar los campos del formulario después de enviar los datos si lo deseas
     setNombre('');
     setEmail('');
-    setTexto('');
+    setTexto('d');
   };
 
   return (
