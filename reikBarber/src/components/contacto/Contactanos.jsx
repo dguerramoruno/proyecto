@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import './contactanos.css';
 
 const contactanos = () => {
   const [nombre, setNombre] = useState('');
@@ -14,13 +15,13 @@ const contactanos = () => {
     // También puedes reiniciar los campos del formulario después de enviar los datos si lo deseas
     setNombre('');
     setEmail('');
-    setTexto('d');
+    setTexto('');
   };
 
   return (
-    <div>
+    <div className="contact-container">
       <h2>Contactanos</h2>
-      <form onSubmit={handleSubmit}>
+      <form className="contact-form" onSubmit={handleSubmit}>
         <div>
           <label htmlFor="nombre">Nombre:</label>
           <input
@@ -39,7 +40,7 @@ const contactanos = () => {
             onChange={(event) => setEmail(event.target.value)}
           />
         </div>
-        <div>
+        <div className="message-container">
           <label htmlFor="texto">Mensaje:</label>
           <textarea
             id="texto"

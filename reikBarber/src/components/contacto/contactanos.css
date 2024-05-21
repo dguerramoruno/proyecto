@@ -1,0 +1,53 @@
+/* contactanos.css */
+
+.contact-container {
+    max-width: 400px;
+    margin: 50px auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+  }
+  
+  .contact-container h2 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+  .contact-container form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .contact-container label {
+    margin-bottom: 5px;
+    color: #555;
+  }
+  
+  .contact-container input[type="text"],
+  .contact-container input[type="email"],
+  .contact-container textarea {
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .contact-container textarea {
+    min-height: 100px;
+  }
+  
+  .contact-container button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .contact-container button:hover {
+    background-color: #0056b3;
+  }
+  

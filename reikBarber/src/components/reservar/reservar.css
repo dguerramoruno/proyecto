@@ -1,7 +1,7 @@
 
 .datepicker-container {
-  width: 600px; /* Ajusta el ancho del contenedor según tus necesidades */
-  height: 800px; /* Ajusta la altura del contenedor según tus necesidades */
+  width: 100vh; /* Ajusta el ancho del contenedor según tus necesidades */
+  height: 40vh; /* Ajusta la altura del contenedor según tus necesidades */
 }
 
 /* Cambia el color de fondo del calendario */
@@ -30,3 +30,6 @@
   background-color: #E0EDEE; /* Cambia el color de fondo según tus preferencias */
 }
 
+.containerR{
+  height: 50vh;
+}

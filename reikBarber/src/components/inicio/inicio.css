@@ -5,6 +5,19 @@
     width: 100%; /* Ajusta el ancho según sea necesario */
     height: 100%; /* Ajusta la altura según sea necesario */
   }
+  .botonL {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px;
+  }
+  
+  .botonL:hover {
+    background-color: #0056b3;
+  }
   
   /* Estilo para que la imagen no enfocada se vea detrás */
   .carousel .slide {
@@ -49,11 +62,7 @@
     background-color: rgba(0, 0, 0, 0.7); /* Cambia el color de fondo de los botones al pasar el ratón por encima */
   }
   
-  button {
-    margin-top: 20px; /* Ajusta el margen superior según sea necesario */
-    /* Agrega otros estilos según lo desees */
-  }
-
+  
   #mapa {
     width: 40vh;
     height: 40vh;

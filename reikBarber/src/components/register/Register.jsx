@@ -27,19 +27,19 @@ const Register = () => {
         <h2>Registrate</h2>
 
         <form onSubmit={e => e.preventDefault()} ref={ref}  > 
-            <label htmlFor ="name"> Nombre y apellidos </label>
+            <label htmlFor ="name"> Nombre y apellidos: </label>
             <input id='name' type = "text" name="name" required></input>
 
-            <label htmlFor ="email"> Email </label>
+            <label htmlFor ="email"> Email: </label>
             <input id='email' type = "text" name="email" required></input>
 
-            <label htmlFor ="tlf"> Numero de teléfono </label>
+            <label htmlFor ="tlf"> Número de teléfono: </label>
             <input id='tlf' type="text" name="phone" required></input>
 
-            <label htmlFor ="user"> Usuario </label>
+            <label htmlFor ="user"> Usuario: </label>
             <input id='user' type = "text" name="username" required></input>
 
-            <label htmlFor ="password"> Contraseña </label>
+            <label htmlFor ="password"> Contraseña: </label>
             <input id='password' type= "password" name="password" required/>
 
             <Link to="/login">Login</Link>

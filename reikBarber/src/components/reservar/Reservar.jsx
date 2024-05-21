@@ -53,7 +53,7 @@ const Reservar = () => {
   };
 
   return (
-    <div className="container">
+    <div className="containerR">
       <div className="datepicker-container">
         <h3>Selecciona una fecha y hora:</h3>
         <DatePicker
@@ -68,6 +68,7 @@ const Reservar = () => {
           filterTime={filterTime}
         />
       </div>
+      <button>Reservar</button>
     </div>
   );
 };

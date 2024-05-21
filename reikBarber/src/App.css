@@ -4,10 +4,3 @@
   padding: 2rem;
   text-align: center;
 }
-
-
-
-body{
-  background-image: url('./assets/fondoo.webp'); /* Cambia la ruta por la ubicación de tu imagen */
-  background-repeat: repeat;
-}
