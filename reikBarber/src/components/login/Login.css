@@ -59,3 +59,7 @@
 .login .register-link a:hover {
   text-decoration: underline;
 }
+
+.la {
+  margin-bottom: 10px;
+}

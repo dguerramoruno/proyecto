@@ -32,4 +32,12 @@
 
 .containerR{
   height: 50vh;
+  max-width: 500px;
+}
+.botonRe{
+  background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
 }

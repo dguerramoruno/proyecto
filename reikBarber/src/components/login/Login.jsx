@@ -51,7 +51,7 @@ const Login = () => {
         <label htmlFor="password"> Contraseña </label>
         <input type="password" name="password" required />
 
-        <Link to="/register">Registrarme</Link>
+        <Link to="/register" className="la">Registrarme</Link>
 
         <button
           onClick={(e) => {

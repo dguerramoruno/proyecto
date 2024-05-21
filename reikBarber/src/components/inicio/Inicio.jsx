@@ -33,7 +33,7 @@ const Inicio = () => {
   }, []);
 
   return (
-    <div>
+    <div className="contenedorI">
       <Carousel autoPlay infiniteLoop showThumbs={false} showStatus={false}>
         <div className="imagenes">
           <img src={imagen1} alt="Imagen 1" className="imageness"/>
