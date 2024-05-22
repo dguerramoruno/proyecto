@@ -11,11 +11,12 @@ setDefaultLocale('es');
 const Reservar = () => {
   const [selectedDate, setSelectedDate] = useState(null);
   const [availableHours, setAvailableHours] = useState([]);
+  const [reservedHours, setReservedHours] = useState([]);
+  const [clientId] = useState(1); // ID del cliente (puedes cambiarlo según tu lógica)
+  const [barberId] = useState(1); // ID del barbero (fijo a 1 como mencionaste)
 
   // Simulando una solicitud al backend para obtener las horas disponibles
   useEffect(() => {
-    // Aquí deberías hacer una solicitud al backend para obtener las horas disponibles
-    // Supongamos que recibimos las horas disponibles en este formato:
     const fetchedAvailableHours = [
       { day: 1, start: "16:00", end: "20:30" }, // Lunes
       { day: 2, start: "16:00", end: "20:30" }, // Martes
@@ -27,20 +28,35 @@ const Reservar = () => {
     setAvailableHours(fetchedAvailableHours);
   }, []);
 
+  // Obtener horas reservadas del backend cuando se selecciona una fecha
+  useEffect(() => {
+    if (selectedDate) {
+      const selectedDay = selectedDate.toISOString().split('T')[0];
+      fetch(`http://localhost:3000/reservations/reserved-hours?day=${selectedDay}`)
+        .then(response => response.json())
+        .then(data => {
+          setReservedHours(data.reservedHours);
+        })
+        .catch(error => {
+          console.error("Error al obtener las horas reservadas:", error);
+        });
+    }
+  }, [selectedDate]);
+
   const handleDateChange = date => {
     setSelectedDate(date);
   };
 
   const filterDate = date => {
     const selectedDay = date.getDay();
-    return selectedDay !== 0; // Devuelve false si es domingo (deshabilita la fecha)
+    return selectedDay !== 0; // Deshabilita domingos
   };
 
   const filterTime = time => {
     if (!selectedDate) return false;
-    
+
     const selectedDay = selectedDate.getDay();
-    const selectedTime = time.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }); 
+    const selectedTime = time.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
 
     if (selectedDay === 0) return false; // Deshabilitar selección si es domingo
 
@@ -49,7 +65,45 @@ const Reservar = () => {
     const startTime = new Date(`1970-01-01T${dayHours.start}`);
     const endTime = new Date(`1970-01-01T${dayHours.end}`);
     const selectedDateTime = new Date(`1970-01-01T${selectedTime}`);
-    return selectedDateTime >= startTime && selectedDateTime <= endTime;
+
+    // Deshabilitar si está fuera del rango o si ya está reservado
+    const isWithinRange = selectedDateTime >= startTime && selectedDateTime <= endTime;
+    const isReserved = reservedHours.includes(selectedTime);
+    return isWithinRange && !isReserved;
+  };
+
+  const handleReservation = () => {
+    if (!selectedDate) {
+      alert("Por favor, selecciona una fecha y hora.");
+      return;
+    }
+
+    const reservationData = {
+      day: selectedDate.toISOString().split('T')[0],
+      hour: selectedDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+      client_id: clientId,
+      barber_id: barberId
+    };
+
+    fetch('http://localhost:3000/reservations', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(reservationData)
+    })
+      .then(response => {
+        if (response.ok) {
+          alert("Reserva creada exitosamente");
+          // Aquí puedes agregar lógica adicional si la reserva se crea con éxito
+        } else {
+          throw new Error("Error al crear la reserva");
+        }
+      })
+      .catch(error => {
+        console.error("Error al crear la reserva:", error);
+        alert("Hubo un error al crear la reserva. Por favor, inténtalo de nuevo.");
+      });
   };
 
   return (
@@ -68,7 +122,7 @@ const Reservar = () => {
           filterTime={filterTime}
         />
       </div>
-      <button className="botonRe">Reservar</button>
+      <button className="botonRe" onClick={handleReservation}>Reservar</button>
     </div>
   );
 };

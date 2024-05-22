@@ -14,5 +14,7 @@ router.get('/users', userController.getAllUsers);
 router.post('/create_reservations', reservationController.createReservation);
 router.get('/reservations/:id', reservationController.getReservationById);
 router.get('/reservations', reservationController.getAllReservations);
-
+router.delete('/reservations/:id', reservationController.deleteReservationById);
+router.get('/reservations/client/:client_id',reservationController.getReservationsByClientId);
+router.get('reservations/reserved-hours?:day',reservationController.getReservedHours)
 module.exports = router;
