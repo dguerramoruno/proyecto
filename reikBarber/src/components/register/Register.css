@@ -63,3 +63,9 @@
 .register .login-link a:hover {
   text-decoration: underline;
 }
+
+.error {
+  color: rgb(241, 52, 52);
+  margin-top: 5px;
+  font-size: 0.9em;
+}

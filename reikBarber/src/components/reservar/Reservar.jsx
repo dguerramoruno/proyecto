@@ -18,12 +18,12 @@ const Reservar = () => {
   // Simulando una solicitud al backend para obtener las horas disponibles
   useEffect(() => {
     const fetchedAvailableHours = [
-      { day: 1, start: "16:00", end: "20:30" }, // Lunes
-      { day: 2, start: "16:00", end: "20:30" }, // Martes
-      { day: 3, start: "16:00", end: "20:30" }, // Miércoles
-      { day: 4, start: "10:00", end: "20:30" }, // Jueves
-      { day: 5, start: "10:00", end: "20:30" }, // Viernes
-      { day: 6, start: "10:00", end: "19:30" }  // Sábado
+      { day: 1, start: "16:00", end: "20:30" }, 
+      { day: 2, start: "16:00", end: "20:30" }, 
+      { day: 3, start: "16:00", end: "20:30" }, 
+      { day: 4, start: "10:00", end: "20:30" }, 
+      { day: 5, start: "10:00", end: "20:30" }, 
+      { day: 6, start: "10:00", end: "19:30" }  
     ];
     setAvailableHours(fetchedAvailableHours);
   }, []);

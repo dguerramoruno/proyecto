@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes,Navigate  } from "react-router-dom";
 import Header from "./components/header/Header";
 import Footer from "./components/footer/Footer";
 import Cookies from "./components/cookies/Cookies";
@@ -13,13 +13,13 @@ import Contactanos from "./components/contacto/Contactanos";
 import { ProtectedRoute } from "./ProtectedRoute";
 
 function App() {
-  // Aquí puedes usar useState si necesitas algún estado en tu aplicación
 
   return (
     <div className="App">
       <Header />
       <main>
         <Routes>
+          <Route path="/" element={<Navigate to="/inicio" />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/inicio" element={<Inicio />} />
