@@ -28,10 +28,9 @@ const getReservationById = (request, response) => {
     response.status(200).json({ reservation });
   });
 };
+
 const getReservedHours = (request, response) => {
-  console.log("hola")
-  console.log(request.params.day)
-  //const { day } = request.params.day;
+  const { day } = request.query;
   
   // Supongamos que el día está en formato "yyyy-MM-dd"
   Reservation.findByDay(day, (err, reservations) => {
@@ -43,6 +42,7 @@ const getReservedHours = (request, response) => {
     response.status(200).json({ reservedHours });
   });
 };
+
 const getAllReservations = (request, response) => {
   Reservation.findAll((err, reservations) => {
     if (err) {

@@ -88,6 +88,7 @@ class Reservation {
     );
   }
   static findByDay(day, callback) {
+    console.log(day)
     connection.query(
       "SELECT hour FROM reservations WHERE day = ?",
       [day],

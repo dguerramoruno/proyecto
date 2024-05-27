@@ -4,7 +4,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import { registerLocale, setDefaultLocale } from "react-datepicker";
 import es from 'date-fns/locale/es';
 import './reservar.css';
-
+import secureLocalStorage from 'react-secure-storage';
 registerLocale('es', es);
 setDefaultLocale('es');
 
@@ -12,8 +12,8 @@ const Reservar = () => {
   const [selectedDate, setSelectedDate] = useState(null);
   const [availableHours, setAvailableHours] = useState([]);
   const [reservedHours, setReservedHours] = useState([]);
-  const [clientId] = useState(1); // ID del cliente (puedes cambiarlo según tu lógica)
-  const [barberId] = useState(1); // ID del barbero (fijo a 1 como mencionaste)
+  const clientId = secureLocalStorage.getItem("id"); // ID del cliente (puedes cambiarlo según tu lógica)
+  const [barberId] = useState(1); // Por el momento solo hay un usuario barbero
 
   // Simulando una solicitud al backend para obtener las horas disponibles
   useEffect(() => {
@@ -32,9 +32,11 @@ const Reservar = () => {
   useEffect(() => {
     if (selectedDate) {
       const selectedDay = selectedDate.toISOString().split('T')[0];
+      console.log(selectedDate)
       fetch(`http://localhost:3000/reservations/reserved-hours?day=${selectedDay}`)
         .then(response => response.json())
         .then(data => {
+          console.log(data.reservedHours)
           setReservedHours(data.reservedHours);
         })
         .catch(error => {
@@ -85,7 +87,7 @@ const Reservar = () => {
       barber_id: barberId
     };
 
-    fetch('http://localhost:3000/reservations', {
+    fetch('http://localhost:3000/create_reservations', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -101,6 +103,7 @@ const Reservar = () => {
         }
       })
       .catch(error => {
+        console.log(reservationData)
         console.error("Error al crear la reserva:", error);
         alert("Hubo un error al crear la reserva. Por favor, inténtalo de nuevo.");
       });

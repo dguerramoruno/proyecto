@@ -14,7 +14,7 @@ const Login = () => {
     for (const [key, value] of formData.entries()) {
       values[key] = value;
     }
-    console.log(values);
+    
 
     const response = await fetch("http://localhost:3000/login", {
       method: "POST",
@@ -23,15 +23,13 @@ const Login = () => {
       },
       body: JSON.stringify(values),
     });
-    console.log("test");
     if (response.ok) {
       const data = await response.json();
       console.log(data)
-      const { username } = data.user;
-
-      console.log(username)
+      const { username,id } = data.user;
+      console.log(id,username)
       secureStorage.setItem("user", username);
-      console.log("okkey")
+      secureStorage.setItem("id", id);
     } else {
       console.error("Error al iniciar sesión");
     }
