@@ -1,9 +1,11 @@
 import { useRef, useState } from "react";
 import './Register.css';
+import { Link, useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 
 const Register = () => {
   const ref = useRef();
+  const navigate = useNavigate();
   const [errors, setErrors] = useState({});
 
   const validateName = (name) => {
@@ -77,6 +79,7 @@ const Register = () => {
       console.error('Error en la creación del usuario');
     }
     form.reset();
+    navigate('/login');
   };
 
   return (
