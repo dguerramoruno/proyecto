@@ -63,3 +63,8 @@
 .la {
   margin-bottom: 10px;
 }
+
+.error {
+  color: rgb(255, 46, 46);
+  margin-top: 10px;
+}

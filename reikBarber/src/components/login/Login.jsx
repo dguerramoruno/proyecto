@@ -1,10 +1,11 @@
-import { useRef } from "react";
+import { useRef,useState } from "react";
 import secureStorage from "react-secure-storage";
 import "./Login.css";
 import { Link } from "react-router-dom";
 
 const Login = () => {
   const ref = useRef();
+  const [error, setError] = useState(null);
 
   const handleLogin = async () => {
     const form = ref.current;
@@ -30,7 +31,9 @@ const Login = () => {
       console.log(id,username)
       secureStorage.setItem("user", username);
       secureStorage.setItem("id", id);
+      setError(null);
     } else {
+      setError("Usuario y/o contraseña incorrectos");
       console.error("Error al iniciar sesión");
     }
   };
@@ -48,7 +51,7 @@ const Login = () => {
         <input type="text" name="username" required></input>
         <label htmlFor="password"> Contraseña </label>
         <input type="password" name="password" required />
-
+        {error && <p className="error">{error}</p>}
         <Link to="/register" className="la">Registrarme</Link>
 
         <button

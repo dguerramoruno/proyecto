@@ -1,7 +1,6 @@
 import { useRef, useState } from "react";
 import './Register.css';
 import { Link, useNavigate } from "react-router-dom";
-import { Link } from "react-router-dom";
 
 const Register = () => {
   const ref = useRef();
