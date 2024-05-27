@@ -4,11 +4,8 @@ const connection = mysql.createConnection({
   host: "127.0.0.1",
   user: "cfgs",
   password: "ira491",
-<<<<<<< HEAD
   database: "barber",
-=======
   database: "proyecto",
->>>>>>> 78b60f171a38a3f22ecbffe82c54ac9c81a302ee
 });
 
 connection.connect((err) => {
