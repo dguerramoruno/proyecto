@@ -1,50 +1,72 @@
 /* Estilos para el componente Reservar */
+
+/* Contenedor principal */
 .datepicker-container {
-  width: 100vh; /* Ajusta el ancho del contenedor según tus necesidades */
-   
+  width: 100%; /* Ancho máximo */
+  max-width: 500px; /* Ancho máximo ajustado */
+  margin: 50px auto; /* Centrado vertical y horizontal */
 }
 
 /* Cambia el color de fondo del calendario */
 .react-datepicker__month-container {
-  background-color: #E0EDEE; 
+  background-color: #E0EDEE;
 }
 
 /* Cambia el color de fondo del día seleccionado */
 .react-datepicker__day--selected {
-  background-color: #347377; 
-  color: #ffffff; 
+  background-color: #347377;
+  color: #ffffff;
 }
 
 /* Cambia el color de fondo de los días disponibles */
 .react-datepicker__day--available {
-  background-color: #4caf50; 
-  color: #ffffff; 
+  background-color: #4caf50;
+  color: #ffffff;
 }
 
+/* Encabezado del calendario */
 .react-datepicker__header {
   background-color: #84AFBF; /* Cambia el color de fondo según tus preferencias */
   color: #ffffff; /* Cambia el color del texto según tus preferencias */
 }
 
+/* Lista de horas */
 .react-datepicker__time-container .react-datepicker__time .react-datepicker__time-box ul.react-datepicker__time-list li {
   background-color: #E0EDEE; /* Cambia el color de fondo según tus preferencias */
 }
 
+/* Contenedor principal de Reservar */
 .containerR {
-  height: 50vh;
-  max-width: 500px;
-  margin: auto; /* Centra horizontalmente el contenedor */
+  width: 90%; /* Ancho máximo */
+  margin: 50px auto; /* Centrado vertical y horizontal */
   display: flex;
   flex-direction: column;
   justify-content: center; /* Centra verticalmente los elementos */
   align-items: center; /* Centra horizontalmente los elementos */
 }
 
+/* Botón de Reservar */
 .botonRe {
+  padding: 10px 20px;
   background-color: #007bff;
   color: #fff;
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  margin-top: 20px;
+}
 
+/* Media query para pantallas más pequeñas */
+@media screen and (max-width: 600px) {
+  .containerR {
+    width: 100%; /* Ajustar al ancho completo en pantallas pequeñas */
+    padding: 20px; /* Añadir espacio interior */
+  }
+}
+
+/* Media query para pantallas más grandes */
+@media screen and (min-width: 768px) {
+  .containerR {
+    max-width: 800px; /* Ancho máximo ajustado para pantallas grandes */
+  }
 }
