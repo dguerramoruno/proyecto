@@ -8,16 +8,10 @@ class Reservation {
     this.client_id = client_id;
     this.barber_id = barber_id;
   }
-  formatDate(date) {
-    const [day, month, year] = date.split("/");
-    return `${year}-${month}-${day}`;
-  }
   save(callback) {
-    const formattedDay = this.formatDate(this.day); // Formatear la fecha aquí
-
     connection.query(
       "INSERT INTO reservations (day, hour, client_id, barber_id) VALUES (?, ?, ?, ?)",
-      [formattedDay, this.hour, this.client_id, this.barber_id],
+      [this.day, this.hour, this.client_id, this.barber_id],
       (error, results, fields) => {
         if (error) {
           console.error("Error al guardar la reserva:", error);
@@ -58,6 +52,7 @@ class Reservation {
   }
 
   static deleteById(id, callback) {
+    console.log(id)
     connection.query(
       "DELETE FROM reservations WHERE id = ?",
       [id],
