@@ -1,21 +1,34 @@
 import React, { useState } from 'react';
 import './contactanos.css';
 
-const contactanos = () => {
+const Contactanos = () => {
   const [nombre, setNombre] = useState('');
   const [email, setEmail] = useState('');
   const [texto, setTexto] = useState('');
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    // Aquí puedes enviar los datos del formulario a tu backend o realizar cualquier otra acción
-    console.log('Nombre:', nombre);
-    console.log('Email:', email);
-    console.log('Texto:', texto);
-    // También puedes reiniciar los campos del formulario después de enviar los datos si lo deseas
-    setNombre('');
-    setEmail('');
-    setTexto('');
+
+    try {
+      const response = await fetch('/http://localhost:3000/contactanos/enviar-correo', { // Envía la solicitud a /api/enviar-correo
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ nombre, email, mensaje: texto }),
+      });
+
+      if (response.ok) {
+        console.log('Correo electrónico enviado correctamente');
+        // Puedes mostrar un mensaje de éxito al usuario si lo deseas
+      } else {
+        console.error('Error al enviar el correo electrónico');
+        // Puedes mostrar un mensaje de error al usuario si lo deseas
+      }
+    } catch (error) {
+      console.error('Error al enviar el correo electrónico:', error);
+      // Puedes mostrar un mensaje de error al usuario si lo deseas
+    }
   };
 
   return (
@@ -23,7 +36,7 @@ const contactanos = () => {
       <h2>Contactanos</h2>
       <form className="contact-form" onSubmit={handleSubmit}>
         <div>
-          <label htmlFor="nombre">Nombre:</label>
+          <label htmlFor="nombre">Nombre: </label>
           <input
             type="text"
             id="nombre"
@@ -32,7 +45,7 @@ const contactanos = () => {
           />
         </div>
         <div>
-          <label htmlFor="email">Correo electrónico:</label>
+          <label htmlFor="email">Correo electrónico: </label>
           <input
             type="email"
             id="email"
@@ -41,7 +54,7 @@ const contactanos = () => {
           />
         </div>
         <div className="message-container">
-          <label htmlFor="texto">Mensaje:</label>
+          <label htmlFor="texto">Mensaje: </label>
           <textarea
             id="texto"
             value={texto}
@@ -54,4 +67,4 @@ const contactanos = () => {
   );
 };
 
-export default contactanos;
+export default Contactanos;

@@ -1,80 +1,104 @@
+/* inicio.css */
+
+/* Estilos base */
 .contenedorI {
-  max-width: 500px;
-  margin: auto; /* Centra horizontalmente el contenedor */
+  max-width: 800px;
+  margin: auto;
+  padding: 0 20px; /* Añadimos un poco de espacio a los lados para dispositivos móviles */
+  display: flex;
+  align-content: center;
+  text-align: center;
+  flex-direction: column;
 }
 
-.imagenes {
+/* Estilos para el carrusel */
+.carousel {
+  border-radius: 15px;
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+
+.carousel .slide {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100%; /* Ajusta el ancho según sea necesario */
-  height: 100%; /* Ajusta la altura según sea necesario */
 }
 
+.carousel .slide > div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.carousel .slide img {
+  max-width: 100%;
+  max-height: 550px;
+  border-radius: 15px;
+  transition: transform 0.3s ease;
+}
+
+/* Estilos para los botones de navegación del carrusel */
+.carousel .control-prev,
+.carousel .control-next {
+  background-color: rgba(0, 0, 0, 0.7);
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.carousel .control-prev:hover,
+.carousel .control-next:hover {
+  background-color: rgba(0, 0, 0, 0.9);
+}
+
+/* Estilos para el botón de reservar */
 .botonL {
-  padding: 10px 20px;
+  padding: 14px 28px;
   background-color: #007bff;
   color: #fff;
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  margin-top: 20px;
+  transition: background-color 0.3s ease;
+  display: block;
+  margin: 20px auto;
 }
 
 .botonL:hover {
   background-color: #0056b3;
 }
 
-/* Estilo para que la imagen no enfocada se vea detrás */
-.carousel .slide {
-  width: 25%; /* Ajusta el ancho del carrusel según sea necesario */
-  height: 25%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-/* Estilo para la contenedor de la imagen */
-.carousel .slide > div {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 25%;
-  height: 25%;
-}
-
-/* Estilo para la imagen */
-.carousel .slide img {
-  max-width: 100%;
-  max-height: 100%;
-  width: auto;
-  height: auto;
-  border-radius: 5%;
-}
-
-/* Estilo para los botones de navegación (flechas) del carrusel */
-.carousel .control-prev,
-.carousel .control-next {
-  border-radius: 50%; /* Hace que los botones sean redondos */
-  width: 0px; /* Ajusta el ancho de los botones según sea necesario */
-  height: 0px; /* Ajusta la altura de los botones según sea necesario */
-  background-color: rgba(0, 0, 0, 0.5); /* Cambia el color de fondo de los botones */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-/* Estilo para los botones de navegación (flechas) del carrusel al pasar el ratón por encima */
-.carousel .control-prev:hover,
-.carousel .control-next:hover {
-  background-color: rgba(0, 0, 0, 0.7); /* Cambia el color de fondo de los botones al pasar el ratón por encima */
-}
-
+/* Estilos para el mapa */
 #mapa {
-  width: 40vh;
-  height: 40vh;
-  border-radius: 15px; /* Esto redondeará las esquinas del mapa */
+  width: 100%;
+  height: 400px;
+  border-radius: 15px;
   overflow: hidden;
-  margin: auto; /* Centra horizontalmente el mapa */
-  margin-top: 5vh;
+  margin-top: 20px;
+}
+
+/* Media queries para dispositivos móviles */
+@media (max-width: 768px) {
+  .contenedorI {
+    padding: 0 10px; /* Reducimos el espacio a los lados en dispositivos móviles */
+  }
+
+  .carousel .slide img {
+    max-height: 200px; /* Reducimos la altura de las imágenes en dispositivos móviles */
+  }
+}
+
+@media (max-width: 576px) {
+  .carousel .slide img {
+    max-height: 150px; /* Reducimos aún más la altura de las imágenes en dispositivos móviles pequeños */
+  }
+}
+
+@media (max-width: 480px) {
+  .carousel .slide img {
+    max-height: 120px; /* Reducimos aún más la altura de las imágenes en dispositivos móviles extra pequeños */
+  }
 }

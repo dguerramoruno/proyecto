@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const userController = require('../controllers/userController');
 const reservationController = require('../controllers/reservationController');
+const contactController = require('../controllers/contactController');
 
 // Rutas para el controlador de usuarios
 router.post('/create_users', userController.createUser);
@@ -17,4 +18,5 @@ router.get('/reservations', reservationController.getAllReservations);
 router.delete('/reservations/:id', reservationController.deleteReservationById);
 router.get('/reservations/client/:client_id',reservationController.getReservationsByClientId);
 router.get('/reservations/reserved-hours', reservationController.getReservedHours);
+router.post('/enviar-correo', contactController.enviarCorreo);
 module.exports = router;
