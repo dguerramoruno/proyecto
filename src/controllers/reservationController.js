@@ -4,7 +4,6 @@ const Reservation = require('../models/reservation');
 const createReservation = (request, response) => {
   const { day, hour, client_id, barber_id } = request.body;
   const newReservation = new Reservation(day, hour, client_id, barber_id);
-
   newReservation.save((err, results) => {
     if (err) {
       console.error("Error al crear reserva:", err);
@@ -54,7 +53,7 @@ const getAllReservations = (request, response) => {
 };
 
 const deleteReservationById = (request, response) => {
-  const reservationId = request.params.id;
+  const {reservationId} = request.query;
 
   Reservation.deleteById(reservationId, (err, result) => {
     if (err) {
@@ -69,8 +68,8 @@ const deleteReservationById = (request, response) => {
 };
 
 const getReservationsByClientId = (request, response) => {
-  const clientId = request.params.client_id;
-
+  const {clientId} = request.query;
+  console.log(clientId)
   Reservation.findByClientId(clientId, (err, reservations) => {
     if (err) {
       console.error("Error al obtener las reservas por client_id:", err);

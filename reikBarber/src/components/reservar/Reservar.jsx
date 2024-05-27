@@ -18,12 +18,12 @@ const Reservar = () => {
   // Simulando una solicitud al backend para obtener las horas disponibles
   useEffect(() => {
     const fetchedAvailableHours = [
-      { day: 1, start: "16:00", end: "20:30" }, 
-      { day: 2, start: "16:00", end: "20:30" }, 
-      { day: 3, start: "16:00", end: "20:30" }, 
-      { day: 4, start: "10:00", end: "20:30" }, 
-      { day: 5, start: "10:00", end: "20:30" }, 
-      { day: 6, start: "10:00", end: "19:30" }  
+      { day: 1, start: "16:00", end: "20:30" }, // Lunes
+      { day: 2, start: "16:00", end: "20:30" }, // Martes
+      { day: 3, start: "16:00", end: "20:30" }, // Miércoles
+      { day: 4, start: "10:00", end: "20:30" }, // Jueves
+      { day: 5, start: "10:00", end: "20:30" }, // Viernes
+      { day: 6, start: "10:00", end: "19:30" }  // Sábado
     ];
     setAvailableHours(fetchedAvailableHours);
   }, []);
@@ -86,6 +86,7 @@ const Reservar = () => {
       client_id: clientId,
       barber_id: barberId
     };
+    console.log(reservationData.day,reservationData.hour)
 
     fetch('http://localhost:3000/create_reservations', {
       method: 'POST',
@@ -97,6 +98,7 @@ const Reservar = () => {
       .then(response => {
         if (response.ok) {
           alert("Reserva creada exitosamente");
+          console.log(JSON.stringify(reservationData))
           // Aquí puedes agregar lógica adicional si la reserva se crea con éxito
         } else {
           throw new Error("Error al crear la reserva");

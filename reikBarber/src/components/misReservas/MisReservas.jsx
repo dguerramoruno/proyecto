@@ -1,32 +1,59 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import DataTable from 'react-data-table-component';
 import './MisReservas.css';
+import secureLocalStorage from 'react-secure-storage';
 
 const MisReservas = () => {
-  const [reservas, setReservas] = useState([
-    { id: 1, dia: '2024-05-21', hora: '14:00', nombre: 'Juan Pérez' },
-    { id: 2, dia: '2024-05-22', hora: '16:00', nombre: 'Ana García' },
-    { id: 3, dia: '2024-05-23', hora: '18:00', nombre: 'Luis Martínez' },
-  ]);
+  const userId = secureLocalStorage.getItem("id");
+  const [reservas, setReservas] = useState([]);
+  useEffect(() => {
+    fetch(`http://localhost:3000/reservations/client?clientId=${userId}`)
+      .then(response => response.json())
+      .then(data => {
+        setReservas(data.reservations);
+      })
+      .catch(error => {
+        console.error("Error al obtener las horas reservadas:", error);
+      }); 
+  }, [userId]);
 
   const handleCancelarReserva = (id) => {
+    console.log(id)
+    fetch(`http://localhost:3000/reservations/delete?reservationId=${id}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+    })
+      .then(response => {
+        if (response.ok) {
+          alert("Reserva borrada exitosamente");
+          // Aquí puedes agregar lógica adicional si la reserva se crea con éxito
+        } else {
+          throw new Error("Error al crear la reserva");
+        }
+      })
+      .catch(error => {
+        console.error("Error al borrar la reserva:", error);
+        alert("Hubo un error al crear la reserva. Por favor, inténtalo de nuevo.");
+      });
     setReservas(reservas.filter(reserva => reserva.id !== id));
   };
 
   const columns = [
     {
+      name: 'ID',
+      selector: row => row.id,
+      sortable: true,
+    },
+    {
       name: 'Día',
-      selector: row => row.dia,
+      selector: row => row.day,
       sortable: true,
     },
     {
       name: 'Hora',
-      selector: row => row.hora,
-      sortable: true,
-    },
-    {
-      name: 'Nombre',
-      selector: row => row.nombre,
+      selector: row => row.hour,
       sortable: true,
     },
     {
