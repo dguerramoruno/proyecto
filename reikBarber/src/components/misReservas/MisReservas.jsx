@@ -75,7 +75,7 @@ const MisReservas = () => {
 
   return (
     <div className="container">
-      <h2>Mis Reservas</h2>
+      <h2>{userRole === "barber" ? "Todas las reservas" : "Mis Reservas"}</h2>
       <DataTable
         columns={columns}
         data={reservas}
