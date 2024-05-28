@@ -5,12 +5,13 @@ const Contactanos = () => {
   const [nombre, setNombre] = useState('');
   const [email, setEmail] = useState('');
   const [texto, setTexto] = useState('');
+  const [message, setMessage] = useState(''); // Estado para manejar mensajes de éxito o error
 
   const handleSubmit = async (event) => {
     event.preventDefault();
 
     try {
-      const response = await fetch('/http://localhost:3000/contactanos/enviar-correo', { // Envía la solicitud a /api/enviar-correo
+      const response = await fetch('http://localhost:3000/enviar-correo', { 
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -19,21 +20,23 @@ const Contactanos = () => {
       });
 
       if (response.ok) {
-        console.log('Correo electrónico enviado correctamente');
-        // Puedes mostrar un mensaje de éxito al usuario si lo deseas
+        setMessage('Correo electrónico enviado correctamente');
+        setNombre(''); // Limpiar el campo de nombre
+        setEmail(''); // Limpiar el campo de email
+        setTexto(''); // Limpiar el campo de mensaje
       } else {
-        console.error('Error al enviar el correo electrónico');
-        // Puedes mostrar un mensaje de error al usuario si lo deseas
+        setMessage('Error al enviar el correo electrónico');
       }
     } catch (error) {
       console.error('Error al enviar el correo electrónico:', error);
-      // Puedes mostrar un mensaje de error al usuario si lo deseas
+      setMessage('Error al enviar el correo electrónico');
     }
   };
 
   return (
     <div className="contact-container">
       <h2>Contactanos</h2>
+      {message && <p>{message}</p>} {/* Mostrar mensaje de éxito o error */}
       <form className="contact-form" onSubmit={handleSubmit}>
         <div>
           <label htmlFor="nombre">Nombre: </label>
