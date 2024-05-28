@@ -9,7 +9,7 @@ registerLocale('es', es);
 setDefaultLocale('es');
 
 const Reservar = () => {
-  const [selectedDate, setSelectedDate] = useState(null);
+  const [selectedDate, setSelectedDate] = useState(new Date(Date.now()));
   const [availableHours, setAvailableHours] = useState([]);
   const [reservedHours, setReservedHours] = useState([]);
   const clientId = secureLocalStorage.getItem("id"); // ID del cliente (puedes cambiarlo según tu lógica)
@@ -30,20 +30,25 @@ const Reservar = () => {
 
   // Obtener horas reservadas del backend cuando se selecciona una fecha
   useEffect(() => {
-    if (selectedDate) {
-      const selectedDay = selectedDate.toISOString().split('T')[0];
-      console.log(selectedDate)
+    getRefreshedData(selectedDate)
+  }, [selectedDate]);
+
+  const getRefreshedData = (date) => {
+    if (date) {
+      const selectedDay = date.toISOString().split('T')[0];
       fetch(`http://localhost:3000/reservations/reserved-hours?day=${selectedDay}`)
         .then(response => response.json())
         .then(data => {
-          console.log(data.reservedHours)
-          setReservedHours(data.reservedHours);
+          setReservedHours(data.reservedHours.map((time) => {
+            const [hour, minutes] = time.split(':')
+            return `${hour}:${minutes}`
+          }))
         })
         .catch(error => {
           console.error("Error al obtener las horas reservadas:", error);
         });
     }
-  }, [selectedDate]);
+  }
 
   const handleDateChange = date => {
     setSelectedDate(date);
@@ -86,7 +91,6 @@ const Reservar = () => {
       client_id: clientId,
       barber_id: barberId
     };
-    console.log(reservationData.day,reservationData.hour)
 
     fetch('http://localhost:3000/create_reservations', {
       method: 'POST',
@@ -98,6 +102,7 @@ const Reservar = () => {
       .then(response => {
         if (response.ok) {
           alert("Reserva creada exitosamente");
+          getRefreshedData(selectedDate)
           console.log(JSON.stringify(reservationData))
           // Aquí puedes agregar lógica adicional si la reserva se crea con éxito
         } else {
@@ -119,9 +124,10 @@ const Reservar = () => {
           selected={selectedDate}
           onChange={handleDateChange}
           dateFormat="dd/MM/yyyy HH:mm"
-          inline 
+          inline
           showTimeSelect 
           timeFormat="HH:mm"
+          excludeTimes={reservedHours}
           timeIntervals={30} 
           filterDate={filterDate}
           filterTime={filterTime}
