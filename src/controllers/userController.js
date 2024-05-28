@@ -49,6 +49,23 @@ const getUserById = (req, res) => {
     res.status(200).json({ user: result[0] });
   });
 };
+
+const getBarbers = async (req, res) => {
+  try {
+    User.findBarbers((error,results)=> {
+      if(error){
+        throw new Error(error)
+      }else{
+        res.status(200).json(results);
+      }
+    });
+  } catch (error) {
+    console.error('Error al obtener los barberos:', error);
+    res.status(500).json({ message: 'Error al obtener los barberos' });
+  }
+};
+
+
 const getAllUsers = (req, res) => {
   const sql = "SELECT * FROM users";
 
@@ -60,4 +77,4 @@ const getAllUsers = (req, res) => {
     res.status(200).json({ users: result });
   });
 };
-module.exports = { createUser, getUserById, getAllUsers,login };
+module.exports = { createUser, getUserById, getAllUsers,login,getBarbers };

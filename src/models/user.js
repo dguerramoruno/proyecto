@@ -26,6 +26,19 @@ class User {
             });
         });
     }
+    static findBarbers(callback) {
+        connection.query('SELECT * FROM users WHERE role = "barber"', (error, results, fields) => {
+            if (error) {
+                console.error("Error al obtener los barberos:", error);
+                return callback(error, null);
+            }
+            if (results.length === 0) {
+                return callback(null, null);
+            }
+            console.log(results)
+            callback(null, results);
+        });
+    }
     static findAll(callback) {
         connection.query('SELECT * FROM users', (error, results, fields) => {
             if (error) {

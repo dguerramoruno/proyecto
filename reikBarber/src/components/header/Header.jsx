@@ -5,11 +5,16 @@ import { faUserCircle } from '@fortawesome/free-solid-svg-icons';
 import logo from '../../assets/logo.png';
 import './Header.css';
 import secureLocalStorage from 'react-secure-storage';
+import { useNavigate  } from 'react-router-dom';
+
 
 const Header = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [username, setUsername] = useState('');
   const [menuOpen, setMenuOpen] = useState(false);
+  const navigate = useNavigate();
+  
+
 
   useEffect(() => {
     let user = secureLocalStorage.getItem("user");
@@ -21,8 +26,17 @@ const Header = () => {
 
   const handleLogout = () => {
     secureLocalStorage.removeItem("user");
+    secureLocalStorage.removeItem("id");
+    secureLocalStorage.removeItem("role");
     setIsAuthenticated(false);
     setUsername('');
+    setMenuOpen(false); 
+  };
+
+
+  const logoutAndRedirect = () => {
+    handleLogout();
+    navigate('/login');
   };
 
   const toggleMenu = () => {
@@ -35,27 +49,33 @@ const Header = () => {
         <img src={logo} alt="Logo de la aplicación" className="logo-image" />
       </div>
       <nav>
-        <div className="menu-toggle" onClick={toggleMenu}>
-          <span></span>
-          <span></span>
-          <span></span>
-        </div>
-        <ul className={`menu ${menuOpen ? 'show' : ''}`}>
+        <ul className="menu">
           <li><Link to="/inicio">Inicio</Link></li>
           <li><Link to="/reservar">Reservar</Link></li>
           <li><Link to="/misReservas">Mis Reservas</Link></li>
           <li><Link to="/contactanos">Contáctanos</Link></li>
           {isAuthenticated ? (
-            <li className="login-link">
-              <button onClick={handleLogout} className="logout-button">{username} (Cerrar sesión)</button>
+            <li>
+      
+              <div >
+              
+              <Link onClick={toggleMenu} className='login-icon'><FontAwesomeIcon icon={faUserCircle} size="2x"/> {username}</Link>
+                
+              </div>
             </li>
           ) : (
-            <li className="login-link">
-              <Link to="/login" className='login-icon'><FontAwesomeIcon icon={faUserCircle} size="2x" /> <span className='login-text'>Inicia sesión</span></Link>
+            <li>
+              <Link to="/login" className='login-icon'><FontAwesomeIcon icon={faUserCircle} size="2x"/>Inicia sesión</Link>
             </li>
           )}
         </ul>
       </nav>
+      {menuOpen && (
+                  <div className="dropdown-menu">
+                    <button onClick={logoutAndRedirect} className="logout-button lg">Cerrar sesión</button>
+                    
+                  </div>
+                )}
     </header>
   );
 }

@@ -61,7 +61,9 @@
   .containerR {
     width: 100%; /* Ajustar al ancho completo en pantallas pequeñas */
     padding: 20px; /* Añadir espacio interior */
+
   }
+  
 }
 
 /* Media query para pantallas más grandes */

@@ -12,8 +12,11 @@ const Reservar = () => {
   const [selectedDate, setSelectedDate] = useState(new Date(Date.now()));
   const [availableHours, setAvailableHours] = useState([]);
   const [reservedHours, setReservedHours] = useState([]);
+  const [barbers, setBarbers] = useState([]);
+  const [selectedBarber, setSelectedBarber] = useState(null);
+  const [styles, setStyles] = useState([]);
+  const [selectedStyle, setSelectedStyle] = useState(null);
   const clientId = secureLocalStorage.getItem("id"); // ID del cliente (puedes cambiarlo según tu lógica)
-  const [barberId] = useState(1); // Por el momento solo hay un usuario barbero
 
   // Simulando una solicitud al backend para obtener las horas disponibles
   useEffect(() => {
@@ -28,9 +31,37 @@ const Reservar = () => {
     setAvailableHours(fetchedAvailableHours);
   }, []);
 
+  // Obtener los barberos del backend
+  useEffect(() => {
+    fetch('http://localhost:3000/barbers')
+      .then(response => response.json())
+      .then(data => {
+        console.log(data)
+        setBarbers(data);
+        setSelectedBarber(data[0].id); // Seleccionar el primer barbero por defecto
+      })
+      .catch(error => {
+        console.error("Error al obtener los barberos:", error);
+      });
+  }, []);
+
+  // Obtener los estilos del backend
+  useEffect(() => {
+    fetch('http://localhost:3000/styles')
+      .then(response => response.json())
+      .then(data => {
+        console.log(data);
+        setStyles(data);
+        setSelectedStyle(data[0].id); // Seleccionar el primer estilo por defecto
+      })
+      .catch(error => {
+        console.error("Error al obtener los estilos:", error);
+      });
+  }, []);
+
   // Obtener horas reservadas del backend cuando se selecciona una fecha
   useEffect(() => {
-    getRefreshedData(selectedDate)
+    getRefreshedData(selectedDate);
   }, [selectedDate]);
 
   const getRefreshedData = (date) => {
@@ -40,18 +71,26 @@ const Reservar = () => {
         .then(response => response.json())
         .then(data => {
           setReservedHours(data.reservedHours.map((time) => {
-            const [hour, minutes] = time.split(':')
-            return `${hour}:${minutes}`
-          }))
+            const [hour, minutes] = time.split(':');
+            return new Date(1970, 0, 1, hour, minutes);
+          }));
         })
         .catch(error => {
           console.error("Error al obtener las horas reservadas:", error);
         });
     }
-  }
+  };
 
   const handleDateChange = date => {
     setSelectedDate(date);
+  };
+
+  const handleBarberChange = event => {
+    setSelectedBarber(event.target.value);
+  };
+
+  const handleStyleChange = event => {
+    setSelectedStyle(event.target.value);
   };
 
   const filterDate = date => {
@@ -75,13 +114,15 @@ const Reservar = () => {
 
     // Deshabilitar si está fuera del rango o si ya está reservado
     const isWithinRange = selectedDateTime >= startTime && selectedDateTime <= endTime;
-    const isReserved = reservedHours.includes(selectedTime);
+    const isReserved = reservedHours.some(
+      reservedTime => reservedTime.getHours() === selectedDateTime.getHours() && reservedTime.getMinutes() === selectedDateTime.getMinutes()
+    );
     return isWithinRange && !isReserved;
   };
 
   const handleReservation = () => {
-    if (!selectedDate) {
-      alert("Por favor, selecciona una fecha y hora.");
+    if (!selectedDate || !selectedBarber || !selectedStyle) {
+      alert("Por favor, selecciona una fecha, hora, barbero y estilo.");
       return;
     }
 
@@ -89,7 +130,8 @@ const Reservar = () => {
       day: selectedDate.toISOString().split('T')[0],
       hour: selectedDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
       client_id: clientId,
-      barber_id: barberId
+      barber_id: selectedBarber,
+      style_id: 3
     };
 
     fetch('http://localhost:3000/create_reservations', {
@@ -100,17 +142,15 @@ const Reservar = () => {
       body: JSON.stringify(reservationData)
     })
       .then(response => {
+        
         if (response.ok) {
           alert("Reserva creada exitosamente");
-          getRefreshedData(selectedDate)
-          console.log(JSON.stringify(reservationData))
-          // Aquí puedes agregar lógica adicional si la reserva se crea con éxito
+          getRefreshedData(selectedDate);
         } else {
           throw new Error("Error al crear la reserva");
         }
       })
       .catch(error => {
-        console.log(reservationData)
         console.error("Error al crear la reserva:", error);
         alert("Hubo un error al crear la reserva. Por favor, inténtalo de nuevo.");
       });
@@ -131,7 +171,29 @@ const Reservar = () => {
           timeIntervals={30} 
           filterDate={filterDate}
           filterTime={filterTime}
+          minDate={new Date()} // Establecer la fecha mínima seleccionable como hoy
+          highlightDates={[{ "highlighted": true, "date": new Date() }]} // Resaltar y deshabilitar días anteriores al actual
         />
+      </div>
+      <div className="barber-select-container">
+        <h3>Selecciona un barbero:</h3>
+        <select value={selectedBarber} onChange={handleBarberChange}>
+          {barbers.map(barber => (
+            <option key={barber.id} value={barber.id}>
+              {barber.name}
+            </option>
+          ))}
+        </select>
+      </div>
+      <div className="style-select-container">
+        <h3>Selecciona un estilo:</h3>
+        <select value={selectedStyle} onChange={handleStyleChange}>
+        {styles.map(style => (
+            <option key={style.id} value={style.id}>
+              {style.name}
+            </option>
+          ))}
+        </select>
       </div>
       <button className="botonRe" onClick={handleReservation}>Reservar</button>
     </div>
