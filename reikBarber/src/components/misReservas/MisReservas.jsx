@@ -1,24 +1,39 @@
-import React, { useState,useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import DataTable from 'react-data-table-component';
 import './MisReservas.css';
 import secureLocalStorage from 'react-secure-storage';
 
 const MisReservas = () => {
   const userId = secureLocalStorage.getItem("id");
+  const userRole = secureLocalStorage.getItem("role"); // Supongamos que tienes guardado el rol del usuario
+
   const [reservas, setReservas] = useState([]);
+
   useEffect(() => {
-    fetch(`http://localhost:3000/reservations/client?clientId=${userId}`)
-      .then(response => response.json())
-      .then(data => {
-        setReservas(data.reservations);
-      })
-      .catch(error => {
-        console.error("Error al obtener las horas reservadas:", error);
-      }); 
-  }, [userId]);
+    if (userRole === "barber") {
+      // Si el usuario es un barbero, obtén todas las reservas
+      fetch('http://localhost:3000/reservations')
+        .then(response => response.json())
+        .then(data => {
+          setReservas(data.reservations);
+        })
+        .catch(error => {
+          console.error("Error al obtener las reservas:", error);
+        });
+    } else {
+      // Si el usuario es un cliente, obtén solo las reservas asociadas a su ID
+      fetch(`http://localhost:3000/reservations/client?clientId=${userId}`)
+        .then(response => response.json())
+        .then(data => {
+          setReservas(data.reservations);
+        })
+        .catch(error => {
+          console.error("Error al obtener las reservas:", error);
+        });
+    }
+  }, [userId, userRole]);
 
   const handleCancelarReserva = (id) => {
-    console.log(id)
     fetch(`http://localhost:3000/reservations/delete?reservationId=${id}`, {
       method: 'DELETE',
       headers: {
@@ -28,24 +43,18 @@ const MisReservas = () => {
       .then(response => {
         if (response.ok) {
           alert("Reserva borrada exitosamente");
-          // Aquí puedes agregar lógica adicional si la reserva se crea con éxito
+          setReservas(reservas.filter(reserva => reserva.id !== id));
         } else {
-          throw new Error("Error al crear la reserva");
+          throw new Error("Error al borrar la reserva");
         }
       })
       .catch(error => {
         console.error("Error al borrar la reserva:", error);
-        alert("Hubo un error al crear la reserva. Por favor, inténtalo de nuevo.");
+        alert("Hubo un error al borrar la reserva. Por favor, inténtalo de nuevo.");
       });
-    setReservas(reservas.filter(reserva => reserva.id !== id));
   };
 
   const columns = [
-    {
-      name: 'ID',
-      selector: row => row.id,
-      sortable: true,
-    },
     {
       name: 'Día',
       selector: row => row.day,

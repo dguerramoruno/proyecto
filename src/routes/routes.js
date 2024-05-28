@@ -18,5 +18,8 @@ router.get('/reservations', reservationController.getAllReservations);
 router.delete('/reservations/delete', reservationController.deleteReservationById);
 router.get('/reservations/client',reservationController.getReservationsByClientId);
 router.get('/reservations/reserved-hours', reservationController.getReservedHours);
+
+//rutas para el controlador de contacto
 router.post('/enviar-correo', contactController.enviarCorreo);
+
 module.exports = router;

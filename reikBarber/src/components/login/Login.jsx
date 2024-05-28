@@ -28,10 +28,11 @@ const Login = () => {
     if (response.ok) {
       const data = await response.json();
       console.log(data)
-      const { username,id } = data.user;
+      const { username,id,role } = data.user;
       console.log(id,username)
       secureStorage.setItem("user", username);
       secureStorage.setItem("id", id);
+      secureStorage.setItem("role", role);
       setError(null);
       form.reset();
       navigate('/inicio');

@@ -131,6 +131,8 @@ const Reservar = () => {
           timeIntervals={30} 
           filterDate={filterDate}
           filterTime={filterTime}
+          minDate={new Date()} // Establecer la fecha mínima seleccionable como hoy
+          highlightDates={[{ "highlighted": true, "date": new Date() }]} // Resaltar y deshabilitar días anteriores al actual
         />
       </div>
       <button className="botonRe" onClick={handleReservation}>Reservar</button>
