@@ -26,7 +26,11 @@ class Reservation {
   }
 
   static findAll(callback) {
-    connection.query("SELECT * FROM reservations", (error, results, fields) => {
+    connection.query(`SELECT reservations.*, barbers.name AS barber_name, clients.name AS client_name, styles.name AS style_name
+    FROM reservations
+    JOIN users AS barbers ON reservations.barber_id = barbers.id
+    JOIN users AS clients ON reservations.client_id = clients.id
+    JOIN styles ON reservations.style = styles.id`, (error, results, fields) => {
       if (error) {
         console.error("Error al obtener todas las reservas:", error);
         return callback(error, null);
