@@ -2,19 +2,19 @@ const connection = require("../utils/database");
 connection.ping();
 
 class Reservation {
-  constructor(day, hour, client_id, barber_id,style_id) {
+  constructor(day, hour, client_id, barber_id,style) {
     this.day = day;
     this.hour = hour; // Asegúrate de asignar correctamente los valores en el constructor
     this.client_id = client_id;
     this.barber_id = barber_id;
-    this.style_id = style_id;
+    this.style = style;
   }
   save(callback) {
     console.log(this)
     connection.query(
-      "INSERT INTO reservations (day, hour, client_id, barber_id,style) VALUES (?, ?, ?, ?,?)",
-      [this.day, this.hour, this.client_id, this.barber_id,this.style_id],
-      (error, results) => {
+      "INSERT INTO reservations (day, hour, client_id, barber_id) VALUES (?, ?, ?, ?,?)",
+      [this.day, this.hour, this.client_id, this.barber_id],this.style,
+      (error, results, fields) => {
         if (error) {
           console.error("Error al guardar la reserva:", error);
           return callback(error,null);
