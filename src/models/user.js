@@ -2,12 +2,13 @@ const connection = require('../utils/database')
 const bcrypt = require('bcrypt');
 
 class User {
-    constructor(username, email,phone,name,password) {
+    constructor(username, email,phone,role,name,password) {
         this.username = username;
         this.email = email;
         this.phone = phone;
         this.name = name;
         this.password = password;
+        this.role = role;
     }
 
     save(callback) {
@@ -16,7 +17,8 @@ class User {
                 console.error("Error al encriptar la contraseña:", err);
                 return callback(err, null);
             }
-            connection.query('INSERT INTO users (username, email, phone_number, name, password) VALUES (?, ?, ?, ?, ?)', [this.username, this.email, this.phone, this.name, hash], (error, results, fields) => {
+            console.log(this.role)
+        connection.query('INSERT INTO users (username, email, phone_number,role, name, password) VALUES (?, ?, ?, ?, ?,?)', [this.username, this.email, this.phone,this.role, this.name, hash], (error, results, fields) => {
                 if (error) {
                     console.error("Error al crear usuario:", error);
                     return callback(error, null);

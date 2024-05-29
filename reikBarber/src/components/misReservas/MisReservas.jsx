@@ -11,7 +11,7 @@ const MisReservas = () => {
 
   useEffect(() => {
     if (userRole === "barber") {
-      fetch("https://localhost:8080/reservations")
+      fetch("http://localhost:3000/reservations")
         .then((response) => response.json())
         .then((data) => {
           setReservas(data.reservations);
@@ -20,7 +20,7 @@ const MisReservas = () => {
           console.error("Error al obtener las reservas:", error);
         });
     } else {
-      fetch(`https://localhost:8080/reservations/client?clientId=${userId}`)
+      fetch(`http://localhost:3000/reservations/client?clientId=${userId}`)
         .then((response) => response.json())
         .then((data) => {
           console.log(data.reservations);
@@ -33,7 +33,7 @@ const MisReservas = () => {
   }, [userId, userRole]);
 
   const handleCancelarReserva = (id) => {
-    fetch(`https://localhost:8080/reservations/delete?reservationId=${id}`, {
+    fetch(`http://localhost:3000/reservations/delete?reservationId=${id}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",

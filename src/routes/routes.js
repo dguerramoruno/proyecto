@@ -7,10 +7,12 @@ const stylesController = require('../controllers/stylesController');
 
 //Rutas para los estilos
 router.get('/styles', stylesController.findAll);
+router.post('/create_styles', stylesController.createCorte);
 
 
 // Rutas para el controlador de usuarios
 router.post('/create_users', userController.createUser);
+router.post('/create_barber', userController.createUser);
 router.post('/login',userController.login);
 router.get('/users/:id', userController.getUserById);
 router.get('/users', userController.getAllUsers);

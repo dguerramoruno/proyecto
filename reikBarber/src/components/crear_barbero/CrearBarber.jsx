@@ -103,7 +103,7 @@ const CrearBarber = () => {
         <label htmlFor="tlf">Número de teléfono:</label>
         <input id="tlf" type="text" name="phone" required />
         {errors.phone && <p className="error">{errors.phone}</p>}
-
+        <input type="hidden" name="role" value="barber"></input>
         <label htmlFor="user">Usuario:</label>
         <input id="user" type="text" name="username" required />
         {errors.username && <p className="error">{errors.username}</p>}

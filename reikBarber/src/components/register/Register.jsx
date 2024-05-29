@@ -75,10 +75,11 @@ const Register = () => {
     });
 
     if (!response.ok) {
+      console.log(values)
       console.error('Error en la creación del usuario');
     }
-    form.reset();
-    navigate('/login');
+    //form.reset();
+    //navigate('/login');
   };
 
   return (
@@ -96,11 +97,11 @@ const Register = () => {
       <label htmlFor="tlf">Número de teléfono:</label>
       <input id="tlf" type="text" name="phone" required />
       {errors.phone && <p className="error">{errors.phone}</p>}
-
+      <input type="hidden" name="role" value="client"></input>
       <label htmlFor="user">Usuario:</label>
       <input id="user" type="text" name="username" required />
       {errors.username && <p className="error">{errors.username}</p>}
-
+      
       <label htmlFor="password">Contraseña:</label>
       <input id="password" type="password" name="password" required />
       {errors.password && <p className="error">{errors.password}</p>}

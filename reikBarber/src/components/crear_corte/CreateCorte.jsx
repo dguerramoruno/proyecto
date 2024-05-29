@@ -34,15 +34,17 @@ const CreateCorte = () => {
 
     setErrors({});
 
-    const response = await fetch('http://localhost:3000/create_corte', {
+    const response = await fetch('http://localhost:3000/create_styles', {
       method: 'POST', 
       headers: {
         'Content-Type': 'application/json'
       },
+      
       body: JSON.stringify(values), 
     });
 
     if (!response.ok) {
+      console.log(values),
       console.error('Error en la creación del corte');
     } else {
       setSuccessMessage('Corte creado correctamente');
