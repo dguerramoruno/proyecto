@@ -131,7 +131,7 @@ const Reservar = () => {
       hour: selectedDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
       client_id: clientId,
       barber_id: selectedBarber,
-      style_id: 3
+      style_id: selectedStyle
     };
 
     fetch('http://localhost:3000/create_reservations', {

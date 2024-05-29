@@ -10,7 +10,7 @@ class Reservation {
     this.style_id = style_id;
   }
   save(callback) {
-    console.log(this.style_id)
+    console.log(this)
     connection.query(
       "INSERT INTO reservations (day, hour, client_id, barber_id,style) VALUES (?, ?, ?, ?,?)",
       [this.day, this.hour, this.client_id, this.barber_id,this.style_id],
