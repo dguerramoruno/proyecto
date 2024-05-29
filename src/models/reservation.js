@@ -2,22 +2,22 @@ const connection = require("../utils/database");
 connection.ping();
 
 class Reservation {
-  constructor(day, hour, client_id, barber_id,style) {
+  constructor(day, hour, client_id, barber_id, style) {
     this.day = day;
-    this.hour = hour; // Asegúrate de asignar correctamente los valores en el constructor
+    this.hour = hour;
     this.client_id = client_id;
     this.barber_id = barber_id;
     this.style = style;
   }
+
   save(callback) {
-    console.log(this)
     connection.query(
-      "INSERT INTO reservations (day, hour, client_id, barber_id) VALUES (?, ?, ?, ?,?)",
-      [this.day, this.hour, this.client_id, this.barber_id],this.style,
+      "INSERT INTO reservations (day, hour, client_id, barber_id, style) VALUES (?, ?, ?, ?, ?)",
+      [this.day, this.hour, this.client_id, this.barber_id, this.style],
       (error, results, fields) => {
         if (error) {
           console.error("Error al guardar la reserva:", error);
-          return callback(error,null);
+          return callback(error, null);
         }
         console.log("Reserva guardada correctamente");
         callback(null, results);
@@ -54,7 +54,7 @@ class Reservation {
   }
 
   static deleteById(id, callback) {
-    console.log(id)
+    console.log(id);
     connection.query(
       "DELETE FROM reservations WHERE id = ?",
       [id],
@@ -73,7 +73,12 @@ class Reservation {
 
   static findByClientId(client_id, callback) {
     connection.query(
-      "SELECT * FROM reservations WHERE client_id = ?",
+      `SELECT reservations.*, barbers.name AS barber_name, clients.name AS client_name, styles.name AS style_name
+       FROM reservations
+       JOIN users AS barbers ON reservations.barber_id = barbers.id
+       JOIN users AS clients ON reservations.client_id = clients.id
+       JOIN styles ON reservations.style = styles.id
+       WHERE reservations.client_id = ?`,
       [client_id],
       (error, results, fields) => {
         if (error) {
@@ -84,8 +89,9 @@ class Reservation {
       }
     );
   }
+
   static findByDay(day, callback) {
-    console.log(day)
+    console.log(day);
     connection.query(
       "SELECT hour FROM reservations WHERE day = ?",
       [day],
