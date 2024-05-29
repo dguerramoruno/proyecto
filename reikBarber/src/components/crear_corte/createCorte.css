@@ -1,0 +1,64 @@
+/* Estilos para el componente CreateCorte */
+
+.create-cut {
+    max-width: 400px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .create-cut h2 {
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  .create-cut form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .create-cut label {
+    margin-bottom: 10px;
+  }
+  
+  .create-cut input {
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .create-cut input:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+  }
+  
+  .create-cut .error {
+    color: red;
+    margin-top: -10px;
+    margin-bottom: 10px;
+  }
+  
+  .create-cut button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .create-cut button:hover {
+    background-color: #0056b3;
+  }
+  
+  .create-cut .success {
+    color: green;
+    margin-top: 10px;
+    text-align: center;
+  }
+  

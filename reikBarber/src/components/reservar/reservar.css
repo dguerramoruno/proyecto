@@ -9,12 +9,12 @@
 
 /* Cambia el color de fondo del calendario */
 .react-datepicker__month-container {
-  background-color: #E0EDEE;
+  background-color: #e9eff0;
 }
 
 /* Cambia el color de fondo del día seleccionado */
 .react-datepicker__day--selected {
-  background-color: #347377;
+  background-color: #a8a8a8;
   color: #ffffff;
 }
 
@@ -26,13 +26,13 @@
 
 /* Encabezado del calendario */
 .react-datepicker__header {
-  background-color: #84AFBF; /* Cambia el color de fondo según tus preferencias */
+  background-color: #e7e7e7; /* Cambia el color de fondo según tus preferencias */
   color: #ffffff; /* Cambia el color del texto según tus preferencias */
 }
 
 /* Lista de horas */
 .react-datepicker__time-container .react-datepicker__time .react-datepicker__time-box ul.react-datepicker__time-list li {
-  background-color: #E0EDEE; /* Cambia el color de fondo según tus preferencias */
+  background-color: #f0f4f5; /* Cambia el color de fondo según tus preferencias */
 }
 
 /* Contenedor principal de Reservar */
@@ -55,6 +55,40 @@
   cursor: pointer;
   margin-top: 20px;
 }
+/* Estilos para los selectores de barberos y estilos */
+.barber-select-container,
+.style-select-container {
+  display: flex;
+  justify-content: space-between;
+  width: 80%;
+  margin-top: 10px; /* Reducir la distancia entre los selectores */
+}
+
+.barber-select-container select,
+.style-select-container select {
+  padding: 3px 5px; /* Reducir el padding para hacer los selectores más pequeños */
+  margin-top: 5px; /* Reducir el margen superior */
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #fff;
+  font-size: 14px; /* Reducir el tamaño de fuente */
+  width: calc(30% - 5px); /* Ajusta el ancho para que ambos selectores tengan el mismo tamaño y haya un espacio entre ellos */
+}
+
+.barber-select-container select:focus,
+.style-select-container select:focus {
+  outline: none;
+  border-color: #007bff; /* Cambia el color del borde al enfocar el selector */
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Agrega una ligera sombra al enfocar el selector */
+}
+
+
+/* Personalización del desplegable */
+.barber-select-container select::-ms-expand,
+.style-select-container select::-ms-expand {
+  display: none; /* Oculta la flecha de despliegue en Internet Explorer */
+}
+
 
 /* Media query para pantallas más pequeñas */
 @media screen and (max-width: 600px) {

@@ -10,6 +10,8 @@ import MisReservas from "./components/misReservas/MisReservas";
 import "./App.css";
 import Inicio from "./components/inicio/Inicio";
 import Contactanos from "./components/contacto/Contactanos";
+import CrearBarber from "./components/crear_barbero/CrearBarber";
+import CreateCorte from "./components/crear_corte/CreateCorte";
 import { ProtectedRoute } from "./ProtectedRoute";
 
 function App() {
@@ -25,6 +27,8 @@ function App() {
           <Route path="/inicio" element={<Inicio />} />
           <Route path="/reservar" element={<Reservar />} />
           <Route path="/misReservas" element={<MisReservas />} />
+          <Route path="/crearBarber" element={<CrearBarber />} />
+          <Route path="/crearCorte" element={<CreateCorte />} />
           <Route element={<ProtectedRoute />}>
           </Route>
           <Route path="/contactanos" element={<Contactanos />} />

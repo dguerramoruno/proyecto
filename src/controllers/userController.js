@@ -77,4 +77,8 @@ const getAllUsers = (req, res) => {
     res.status(200).json({ users: result });
   });
 };
+
+
+
+
 module.exports = { createUser, getUserById, getAllUsers,login,getBarbers };
