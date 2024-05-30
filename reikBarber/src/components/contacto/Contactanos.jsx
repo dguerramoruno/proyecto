@@ -2,12 +2,14 @@ import React, { useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import secureLocalStorage from 'react-secure-storage';
 import './contactanos.css';
+import ModalContacto from '../Modals/Modal'; 
 
 const Contactanos = () => {
   const [nombre, setNombre] = useState('');
   const [email, setEmail] = useState('');
   const [texto, setTexto] = useState('');
   const [message, setMessage] = useState(''); 
+  const [showModal, setShowModal] = useState(false); 
   const navigate = useNavigate();
   const clientId = secureLocalStorage.getItem("id");
 
@@ -30,26 +32,33 @@ const Contactanos = () => {
         setTexto('');
       } else {
         setMessage('Error al enviar el correo electrónico');
+        setShowModal(true); 
       }
     } catch (error) {
       console.error('Error al enviar el correo electrónico:', error);
       setMessage('Error al enviar el correo electrónico');
+      setShowModal(true); 
     }
   };
 
   const comproLog = () => {
     if (!clientId) { 
-      alert("Debes iniciar sesión para hacer una reserva.");
-      navigate("/login"); 
+      setShowModal(true); 
+      
       return;
     }
+  };
+ 
+  const logg = () => {
+    setShowModal(false);
+    navigate("/login");
   };
 
   return (
     <div className="contact-container">
       <h2>Contactanos</h2>
       {message && <p>{message}</p>}
-      <form className="contact-form" /*onSubmit={handleSubmit} */ action="mailto:proyectopaudavid@gamil.com" method="post" encType="text/plain">
+      <form className="contact-form" onSubmit={handleSubmit} action="mailto:proyectopaudavid@gamil.com" method="post" encType="text/plain">
 
         <div>
           <label htmlFor="nombre">Nombre: </label>
@@ -79,6 +88,10 @@ const Contactanos = () => {
         </div>
         <button type="submit" onClick={comproLog}>Enviar</button>
       </form>
+      <ModalContacto isOpen={showModal} onClose={() => setShowModal(false)}> 
+        <p>Para enviar un mensaje debes estar registrado.</p>
+        <button onClick={logg }>Aceptar</button>
+      </ModalContacto>
     </div>
   );
 };

@@ -6,6 +6,7 @@ import es from 'date-fns/locale/es';
 import './reservar.css';
 import secureLocalStorage from 'react-secure-storage';
 import { useNavigate } from "react-router-dom";
+import ModalContacto from '../Modals/Modal'; 
 registerLocale('es', es);
 setDefaultLocale('es');
 
@@ -17,6 +18,8 @@ const Reservar = () => {
   const [selectedBarber, setSelectedBarber] = useState(null);
   const [styles, setStyles] = useState([]);
   const [selectedStyle, setSelectedStyle] = useState(null);
+  const [showModal, setShowModal] = useState(false); 
+  const [modalContent, setModalContent] = useState(''); 
   const clientId = secureLocalStorage.getItem("id"); // ID del cliente (puedes cambiarlo según tu lógica)
   const navigate = useNavigate();
 
@@ -124,12 +127,13 @@ const Reservar = () => {
 
   const handleReservation = () => {
     if (!clientId) { // Verifica si el cliente está logueado
-      alert("Debes iniciar sesión para hacer una reserva.");
-      navigate("/login"); // Redirige a la página de inicio de sesión
+      setModalContent('Para hacer una reserva debes iniciar sesión'); // Establecer contenido del modal
+      setShowModal(true);
       return;
     }
     if (!selectedDate || !selectedBarber || !selectedStyle) {
-      alert("Por favor, selecciona una fecha, hora, barbero y estilo.");
+      setModalContent('Por favor, selecciona una fecha, hora, barbero y estilo.'); // Establecer contenido del modal
+      setShowModal(true); 
       return;
     }
 
@@ -159,8 +163,22 @@ const Reservar = () => {
       })
       .catch(error => {
         console.error("Error al crear la reserva:", error);
-        alert("Hubo un error al crear la reserva. Por favor, inténtalo de nuevo.");
+        
+      setModalContent('Hubo un error al crear la reserva. Por favor, inténtalo de nuevo.'); // Establecer contenido del modal
+      setShowModal(true);
+        
       });
+  };
+  const logg = () => {
+    if (!clientId) { // Verifica si el cliente está logueado
+      setShowModal(false);
+      navigate("/login");
+      return;
+    }else{
+      setShowModal(false);
+      return;
+    }
+    
   };
 
   return (
@@ -202,6 +220,10 @@ const Reservar = () => {
           ))}
         </select>
       </div>
+      <ModalContacto isOpen={showModal} onClose={() => setShowModal(false)}> 
+        <p>{modalContent}</p>
+        <button className="botonRe" onClick={logg }>Aceptar</button>
+      </ModalContacto>
       <button className="botonRe" onClick={handleReservation}>Reservar</button>
     </div>
   );
