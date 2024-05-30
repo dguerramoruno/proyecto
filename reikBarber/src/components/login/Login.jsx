@@ -45,7 +45,7 @@ const Login = () => {
 
   return (
     <div className="login">
-      <h2>Inicia sessión</h2>
+      <h2>Inicia sesión</h2>
       <form
         onSubmit={(e) => {
           e.preventDefault();
