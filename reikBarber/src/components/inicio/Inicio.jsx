@@ -49,12 +49,12 @@ const Inicio = () => {
         </div>
       </Carousel>
 
-      {/* Botón de Reservar */}
+      
       <Link to="/reservar" >
         <button className="botonL">Reservar</button>
       </Link>
 
-      {/* Mapa interactivo */}
+      
       <div id="mapa" ref={mapRef} />
     </div>
   );

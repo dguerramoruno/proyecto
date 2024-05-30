@@ -2,14 +2,14 @@
 
 .contact-container {
   max-width: 400px;
-  margin: 50px auto; /* Centrado vertical y horizontal */
+  margin: 50px auto; 
   padding: 30px;
   border-radius: 10px;
   background-color: #ffffff;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-  display: flex; /* Cambio */
-  flex-direction: column; /* Cambio */
-  align-items: center; /* Centrado horizontal */
+  display: flex; 
+  flex-direction: column; 
+  align-items: center; 
 }
 
 .contact-container h2 {
@@ -22,15 +22,15 @@
 .contact-container form {
   display: flex;
   flex-direction: column;
-  align-items: center; /* Centrado horizontal */
-  width: 100%; /* Ajustar al ancho del contenedor */
+  align-items: center; 
+  width: 100%;
 }
 
 .contact-container label {
   margin-bottom: 10px;
   color: #555555;
-  width: 100%; /* Ajustar al ancho del contenedor */
-  text-align: left; /* Alinear el texto a la izquierda */
+  width: 100%; 
+  text-align: left; 
 }
 
 .contact-container input[type="text"],
@@ -42,8 +42,8 @@
   border-radius: 5px;
   font-size: 16px;
   transition: border-color 0.3s ease;
-  width: 100%; /* Ajustar al ancho del contenedor */
-  box-sizing: border-box; /* Incluir padding y borde en el ancho */
+  width: 100%;
+  box-sizing: border-box; 
 }
 
 .contact-container textarea {
@@ -72,7 +72,7 @@
   background-color: #0056b3;
 }
 
-/* Ajuste del ancho del campo de correo electrónico */
+
 .contact-container input[type="email"] {
-  width: calc(100% - 24px); /* Se reduce 24px para igualar al resto */
+  width: calc(100% - 24px); 
 }

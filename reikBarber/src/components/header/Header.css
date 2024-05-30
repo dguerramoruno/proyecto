@@ -81,7 +81,7 @@ nav {
   text-decoration: none;
 }
 
-/* Responsive Design */
+
 @media (max-width: 768px) {
   .menu {
     flex-direction: column;
@@ -131,7 +131,6 @@ nav {
   background-color: rgb(240, 39, 39);
 }
 
-/* Menu Toggle Button for Mobile */
 .menu-toggle {
   display: none;
 }

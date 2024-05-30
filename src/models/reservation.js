@@ -94,6 +94,25 @@ class Reservation {
     );
   }
 
+  static findByBarberId(barber_id, callback) {
+    connection.query(
+      `SELECT reservations.*, barbers.name AS barber_name, clients.name AS client_name, styles.name AS style_name
+       FROM reservations
+       JOIN users AS barbers ON reservations.barber_id = barbers.id
+       JOIN users AS clients ON reservations.client_id = clients.id
+       JOIN styles ON reservations.style = styles.id
+       WHERE reservations.barber_id = ?`,
+      [barber_id],
+      (error, results, fields) => {
+        if (error) {
+          console.error("Error al obtener las reservas por barber_id:", error);
+          return callback(error, null);
+        }
+        callback(null, results);
+      }
+    );
+  }
+
   static findByDay(day, callback) {
     console.log(day);
     connection.query(

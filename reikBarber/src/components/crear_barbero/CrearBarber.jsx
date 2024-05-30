@@ -19,12 +19,12 @@ const CrearBarber = () => {
   };
 
   const validatePhone = (phone) => {
-    const phoneRegex = /^[0-9]{9}$/; // Suponiendo que el teléfono debe ser de 10 dígitos
+    const phoneRegex = /^[0-9]{9}$/; 
     return phoneRegex.test(phone);
   };
 
   const validatePassword = (password) => {
-    // Al menos 8 caracteres, al menos una letra y al menos un número
+    
     const passwordRegex = /^(?=.*[a-zA-Z])(?=.*\d)[A-Za-z\d]{8,}$/;
     return passwordRegex.test(password);
   };
@@ -82,8 +82,8 @@ const CrearBarber = () => {
       form.reset();
       setTimeout(() => {
         setSuccessMessage('');
-        navigate('/inicio'); // Redirigir a la página de inicio
-      }, 3000); // Ocultar el mensaje después de 3 segundos
+        navigate('/inicio'); 
+      }, 3000); 
     }
   };
 

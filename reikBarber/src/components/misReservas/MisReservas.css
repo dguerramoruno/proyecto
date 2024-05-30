@@ -1,55 +1,67 @@
 /* MisReservas.css */
 
 .container {
-    max-width: 800px;
-    margin: 50px auto;
-    padding: 20px;
-    background-color: #ffffff;
-    border-radius: 8px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-  }
+  max-width: 800px;
+  margin: 50px auto;
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+  text-align: center;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+}
+
+th, td {
+  padding: 12px;
+  border: 1px solid #ddd;
+  text-align: left;
+}
+
+th {
+  background-color: #f2f2f2;
+  font-weight: bold;
+}
+
+td.actions {
+  text-align: center; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.botonR {
+  padding: 8px 16px;
+  background-color: #ce4e4e; 
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.botonR:hover {
+  background-color: #d32f2f; 
+}
+.login button:hover {
+  background-color: #0056b3;
+}
+
+.BOTONN{
   
-  h2 {
-    text-align: center;
-    color: #333;
-    margin-bottom: 20px;
-  }
-  
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    margin: 20px 0;
-  }
-  
-  th, td {
-    padding: 12px;
-    border: 1px solid #ddd;
-    text-align: left;
-  }
-  
-  th {
-    background-color: #f2f2f2;
-    font-weight: bold;
-  }
-  
-  td.actions {
-    text-align: center; /* Centra el contenido de las celdas de acciones */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .botonR {
-    padding: 8px 16px;
-    background-color: #ce4e4e; /* Rojo no muy intenso */
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  .botonR:hover {
-    background-color: #d32f2f; /* Rojo más oscuro al pasar el cursor */
-  }
-  
+background-color: #007bff;
+color: #fff;
+border: none;
+border-radius: 8px white; 
+cursor: pointer;
+font-size: 16px; 
+}

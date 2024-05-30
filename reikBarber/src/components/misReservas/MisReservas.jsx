@@ -54,6 +54,16 @@ const MisReservas = () => {
         );
       });
   };
+  const mostrarSoloMisReservas = () => {
+    fetch(`http://localhost:3000/reservations/barber?barberId=${userId}`)
+    .then((response) => response.json())
+    .then((data) => {
+      setReservas(data.reservations);
+    })
+    .catch((error) => {
+      console.error("Error al obtener las reservas del barbero:", error);
+    });
+  };
 
   const columns = [
     {
@@ -97,6 +107,9 @@ const MisReservas = () => {
   return (
     <div className="container">
       <h2>{userRole === "barber" ? "Todas las reservas" : "Mis Reservas"}</h2>
+      {userRole === "barber" && (
+        <button className="BOTONN" onClick={mostrarSoloMisReservas}>mis reservas</button>
+      )}
       <DataTable
         columns={columns}
         data={reservas}

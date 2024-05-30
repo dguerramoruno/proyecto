@@ -1,8 +1,8 @@
 /* Register.css */
 
 .register {
-  max-width: 400px; /* Ancho máximo ajustado */
-  margin:  auto; /* Centrado vertical y horizontal */
+  max-width: 400px; 
+  margin:  auto; 
   padding: 30px;
   border-radius: 8px;
   background-color: #fff;
@@ -64,5 +64,5 @@
 
 .error {
   color: rgb(241, 52, 52);
-  margin-top: 20px; /* Aumentado el espacio entre el mensaje de error y el botón */
+  margin-top: 20px; 
 }

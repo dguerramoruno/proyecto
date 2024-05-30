@@ -18,12 +18,12 @@ const Register = () => {
   };
 
   const validatePhone = (phone) => {
-    const phoneRegex = /^[0-9]{9}$/; // Suponiendo que el teléfono debe ser de 10 dígitos
+    const phoneRegex = /^[0-9]{9}$/; 
     return phoneRegex.test(phone);
   };
 
   const validatePassword = (password) => {
-    // Al menos 8 caracteres, al menos una letra y al menos un número
+    
     const passwordRegex = /^(?=.*[a-zA-Z])(?=.*\d)[A-Za-z\d]{8,}$/;
     return passwordRegex.test(password);
   };
@@ -78,8 +78,7 @@ const Register = () => {
       console.log(values)
       console.error('Error en la creación del usuario');
     }
-    //form.reset();
-    //navigate('/login');
+    
   };
 
   return (

@@ -78,6 +78,17 @@ const getReservationsByClientId = (request, response) => {
     response.status(200).json({ reservations });
   });
 };
+const getReservationsByBarberId = (request, response) => {
+  const { barberId } = request.query;
+  
+  Reservation.findByBarberId(barberId, (err, reservations) => {
+    if (err) {
+      console.error("Error al obtener las reservas por barber_id:", err);
+      return response.status(500).json({ message: "Error al obtener las reservas" });
+    }
+    response.status(200).json({ reservations });
+  });
+};
 
 module.exports = { 
   createReservation, 
@@ -85,5 +96,6 @@ module.exports = {
   getAllReservations, 
   deleteReservationById, 
   getReservationsByClientId,
-  getReservedHours 
+  getReservedHours ,
+  getReservationsByBarberId
 };

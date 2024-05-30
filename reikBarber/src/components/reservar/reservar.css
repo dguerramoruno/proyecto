@@ -1,51 +1,51 @@
 /* Estilos para el componente Reservar */
 
-/* Contenedor principal */
+
 .datepicker-container {
-  width: 100%; /* Ancho máximo */
-  max-width: 500px; /* Ancho máximo ajustado */
-  margin: 50px auto; /* Centrado vertical y horizontal */
+  width: 100%; 
+  max-width: 500px;
+  margin: 50px auto; 
 }
 
-/* Cambia el color de fondo del calendario */
+
 .react-datepicker__month-container {
   background-color: #e9eff0;
 }
 
-/* Cambia el color de fondo del día seleccionado */
+
 .react-datepicker__day--selected {
   background-color: #a8a8a8;
   color: #ffffff;
 }
 
-/* Cambia el color de fondo de los días disponibles */
+
 .react-datepicker__day--available {
   background-color: #4caf50;
   color: #ffffff;
 }
 
-/* Encabezado del calendario */
+
 .react-datepicker__header {
-  background-color: #e7e7e7; /* Cambia el color de fondo según tus preferencias */
-  color: #ffffff; /* Cambia el color del texto según tus preferencias */
+  background-color: #e7e7e7; 
+  color: #ffffff; 
 }
 
-/* Lista de horas */
+
 .react-datepicker__time-container .react-datepicker__time .react-datepicker__time-box ul.react-datepicker__time-list li {
-  background-color: #f0f4f5; /* Cambia el color de fondo según tus preferencias */
+  background-color: #f0f4f5; 
 }
 
-/* Contenedor principal de Reservar */
+
 .containerR {
-  width: 90%; /* Ancho máximo */
-  margin: 50px auto; /* Centrado vertical y horizontal */
+  width: 90%; 
+  margin: 50px auto; 
   display: flex;
   flex-direction: column;
-  justify-content: center; /* Centra verticalmente los elementos */
-  align-items: center; /* Centra horizontalmente los elementos */
+  justify-content: center; 
+  align-items: center; 
 }
 
-/* Botón de Reservar */
+
 .botonRe {
   padding: 10px 20px;
   background-color: #007bff;
@@ -55,54 +55,54 @@
   cursor: pointer;
   margin-top: 20px;
 }
-/* Estilos para los selectores de barberos y estilos */
+
 .barber-select-container,
 .style-select-container {
   display: flex;
   justify-content: space-between;
   width: 80%;
-  margin-top: 10px; /* Reducir la distancia entre los selectores */
+  margin-top: 10px; 
 }
 
 .barber-select-container select,
 .style-select-container select {
-  padding: 3px 5px; /* Reducir el padding para hacer los selectores más pequeños */
-  margin-top: 5px; /* Reducir el margen superior */
+  padding: 3px 5px; 
+  margin-top: 5px; 
   border: 1px solid #ccc;
   border-radius: 5px;
   background-color: #fff;
-  font-size: 14px; /* Reducir el tamaño de fuente */
-  width: calc(30% - 5px); /* Ajusta el ancho para que ambos selectores tengan el mismo tamaño y haya un espacio entre ellos */
+  font-size: 14px; 
+  width: calc(30% - 5px); 
 }
 
 .barber-select-container select:focus,
 .style-select-container select:focus {
   outline: none;
-  border-color: #007bff; /* Cambia el color del borde al enfocar el selector */
-  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Agrega una ligera sombra al enfocar el selector */
+  border-color: #007bff; 
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); 
 }
 
 
-/* Personalización del desplegable */
+
 .barber-select-container select::-ms-expand,
 .style-select-container select::-ms-expand {
-  display: none; /* Oculta la flecha de despliegue en Internet Explorer */
+  display: none; 
 }
 
 
-/* Media query para pantallas más pequeñas */
+
 @media screen and (max-width: 600px) {
   .containerR {
-    width: 100%; /* Ajustar al ancho completo en pantallas pequeñas */
-    padding: 20px; /* Añadir espacio interior */
+    width: 100%;
+    padding: 20px; 
 
   }
   
 }
 
-/* Media query para pantallas más grandes */
+
 @media screen and (min-width: 768px) {
   .containerR {
-    max-width: 800px; /* Ancho máximo ajustado para pantallas grandes */
+    max-width: 800px; 
   }
 }

@@ -7,10 +7,10 @@
   color: #333;
   padding: 2px;
   text-align: center;
-  /* Asegura que el footer ocupe todo el ancho de la página */
+  
   width: 100%;
-  position: fixed; /* Fija el footer en la parte inferior de la pantalla */
-  bottom: 0; /* Alinea el footer en la parte inferior */
-  left: 0; /* Asegura que el footer comience desde el lado izquierdo */
+  position: fixed; 
+  bottom: 0; 
+  left: 0; 
   z-index: 2000;
 }

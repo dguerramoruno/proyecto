@@ -5,6 +5,7 @@ import { registerLocale, setDefaultLocale } from "react-datepicker";
 import es from 'date-fns/locale/es';
 import './reservar.css';
 import secureLocalStorage from 'react-secure-storage';
+import { useNavigate } from "react-router-dom";
 registerLocale('es', es);
 setDefaultLocale('es');
 
@@ -17,6 +18,7 @@ const Reservar = () => {
   const [styles, setStyles] = useState([]);
   const [selectedStyle, setSelectedStyle] = useState(null);
   const clientId = secureLocalStorage.getItem("id"); // ID del cliente (puedes cambiarlo según tu lógica)
+  const navigate = useNavigate();
 
   // Simulando una solicitud al backend para obtener las horas disponibles
   useEffect(() => {
@@ -121,6 +123,11 @@ const Reservar = () => {
   };
 
   const handleReservation = () => {
+    if (!clientId) { // Verifica si el cliente está logueado
+      alert("Debes iniciar sesión para hacer una reserva.");
+      navigate("/login"); // Redirige a la página de inicio de sesión
+      return;
+    }
     if (!selectedDate || !selectedBarber || !selectedStyle) {
       alert("Por favor, selecciona una fecha, hora, barbero y estilo.");
       return;

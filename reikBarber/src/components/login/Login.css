@@ -1,18 +1,18 @@
 /* Login.css */
 
 .login {
-  max-width: 400px; /* Reducido el ancho máximo para centrarlo mejor */
+  max-width: 400px; 
   margin: 50px auto;
-  padding: 30px; /* Aumentado el padding para más espacio alrededor del formulario */
-  border-radius: 10px; /* Aumentado el radio de borde para suavizar las esquinas */
-  background-color: #fff; /* Cambiado el color de fondo a blanco */
-  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1); /* Añadida una sombra suave */
+  padding: 30px; 
+  border-radius: 10px; 
+  background-color: #fff; 
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1); 
 }
 
 .login h2 {
   text-align: center;
   color: #333;
-  margin-bottom: 30px; /* Aumentado el espacio entre el título y el formulario */
+  margin-bottom: 30px; 
 }
 
 .login form {
@@ -27,21 +27,21 @@
 
 .login input[type="text"],
 .login input[type="password"] {
-  padding: 15px; /* Aumentado el padding para hacer los campos de entrada más grandes */
-  margin-bottom: 20px; /* Aumentado el espacio entre los campos */
+  padding: 15px; 
+  margin-bottom: 20px; 
   border: 1px solid #ccc;
-  border-radius: 8px; /* Reducido el radio de borde para suavizar las esquinas */
-  font-size: 16px; /* Ajustado el tamaño de fuente */
+  border-radius: 8px; 
+  font-size: 16px; 
 }
 
 .login button {
-  padding: 15px 30px; /* Aumentado el padding para hacer el botón más grande */
+  padding: 15px 30px; 
   background-color: #007bff;
   color: #fff;
   border: none;
-  border-radius: 8px; /* Reducido el radio de borde para hacer el botón más redondeado */
+  border-radius: 8px; 
   cursor: pointer;
-  font-size: 16px; /* Ajustado el tamaño de fuente */
+  font-size: 16px; 
 }
 
 .login button:hover {
@@ -50,7 +50,7 @@
 
 .register-link {
   text-align: center;
-  margin-top: 20px; /* Aumentado el espacio entre el formulario y el enlace de registro */
+  margin-top: 20px; 
 }
 
 .register-link a {
@@ -63,10 +63,10 @@
 }
 
 .la {
-  margin-bottom: 20px; /* Aumentado el espacio entre el enlace de registro y el botón */
+  margin-bottom: 20px; 
 }
 
 .error {
   color: rgb(255, 46, 46);
-  margin-top: 20px; /* Aumentado el espacio entre el mensaje de error y el botón */
+  margin-top: 20px; 
 }

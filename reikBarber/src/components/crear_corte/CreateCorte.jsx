@@ -51,8 +51,8 @@ const CreateCorte = () => {
       form.reset();
       setTimeout(() => {
         setSuccessMessage('');
-        navigate('/inicio'); // Redirigir a la página de inicio
-      }, 3000); // Ocultar el mensaje después de 3 segundos
+        navigate('/inicio'); 
+      }, 3000); 
     }
   };
 
