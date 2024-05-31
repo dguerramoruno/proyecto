@@ -8,7 +8,7 @@ const app = express();
 const privateKey = fs.readFileSync('./ssl/selfsigned.key', 'utf8');
 const certificate = fs.readFileSync('./ssl/selfsigned.crt', 'utf8');
 const credentials = { key: privateKey, cert: certificate };
-
+process.env.NODE_TLS_REJECT_UNAUTHORIZED=0
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
