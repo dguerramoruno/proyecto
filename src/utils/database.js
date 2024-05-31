@@ -1,7 +1,7 @@
 const mysql = require("mysql");
 
 const connection = mysql.createConnection({
-  host: "viaduct.proxy.rlwy.net",
+  host: "viaduct.proxy.rlwy.net:23937",
   user: "root",
   password: "UvTGdPkwYPxySAISRRMiWGepprfQMnjM",
   database: "railway",
