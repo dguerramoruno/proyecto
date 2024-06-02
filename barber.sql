@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 28-05-2024 a las 23:21:10
+-- Tiempo de generación: 02-06-2024 a las 21:37:33
 -- Versión del servidor: 10.4.27-MariaDB
 -- Versión de PHP: 8.2.0
 
@@ -41,9 +41,11 @@ CREATE TABLE `reservations` (
 --
 
 INSERT INTO `reservations` (`id`, `day`, `hour`, `client_id`, `barber_id`, `style`) VALUES
-(20, '0000-00-00', '18:00:00', 1, 1, 2),
 (21, '2024-06-01', '19:30:00', 5, 1, 1),
-(22, '2024-06-01', '19:30:00', 5, 1, 1);
+(23, '2024-05-31', '13:00:00', 5, 1, 2),
+(25, '2024-06-27', '20:30:00', 5, 1, 1),
+(26, '2024-06-22', '18:00:00', 6, 1, 1),
+(27, '2024-06-22', '18:30:00', 6, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -62,8 +64,10 @@ CREATE TABLE `styles` (
 
 INSERT INTO `styles` (`id`, `name`) VALUES
 (1, 'Corte sencillo'),
-(2, 'Corte con Barba'),
-(3, 'Teñir pelo');
+(2, 'Corte con barba'),
+(3, 'Teñir pelo'),
+(7, 'Corte fasilito primiko'),
+(8, 'dasdasdad');
 
 -- --------------------------------------------------------
 
@@ -76,7 +80,7 @@ CREATE TABLE `users` (
   `name` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
   `phone_number` varchar(20) DEFAULT NULL,
-  `role` enum('client','barber') NOT NULL DEFAULT 'client',
+  `role` varchar(2555) NOT NULL,
   `username` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
@@ -89,9 +93,16 @@ INSERT INTO `users` (`id`, `name`, `email`, `phone_number`, `role`, `username`, 
 (1, 'David Guerra', 'dguerramoruno@gmail.com', '605930289', 'barber', 'dguerra', 'Marianao123'),
 (2, 'Pau tienda', 'pautiendapfi@gmail.com', '605930289', 'barber', 'pautienda', 'Marianao123'),
 (4, 'Javi', 'javi@gmail.com', '605498234', 'client', 'javi', 'Marianao123'),
-(5, 'Idaira', 'id@gmail.com', '505032234', 'client', 'test', '$2b$10$rVNeZ/DuxzmEaRQqkt3gO.wpI8w5FmBB1MpIL1gp/OCODDp2iWNN6'),
+(5, 'Idaira', 'id@gmail.com', '505032234', 'barber', 'test', '$2b$10$rVNeZ/DuxzmEaRQqkt3gO.wpI8w5FmBB1MpIL1gp/OCODDp2iWNN6'),
 (6, 'Edgar', 'edg@gmail.com', '605930289', 'client', 'testing', '$2b$10$5O3IaUf5ufgALKtF9m2iEu8WLDpGB/4VEg4q5JUeN6lUQr0fJJEKe'),
-(8, 'test', 'test@gmail.com', '605930289', 'client', 'test', '$2b$10$iBFlQfD33rxokOtEXLw4MuWAGkktd9yPjDNhsfhAA/h4TXf19LACm');
+(8, 'test', 'test@gmail.com', '605930289', 'client', 'test', '$2b$10$iBFlQfD33rxokOtEXLw4MuWAGkktd9yPjDNhsfhAA/h4TXf19LACm'),
+(10, 'client', 'dguerramorun23o@gmail.com', '605930289', 'client', 'dguerratest', '$2b$10$MfVd4weWheFXlNoDLe.7EeR7jqDySUQKJu0f9fgmMKir7G7vLQIza'),
+(11, 'client', 'dguerramorun233o@gmail.com', '605930289', 'Marianao123', 'dguerratest', '$2b$10$OCWVespPt/Ly.beJ5gnHIu/BaYpMpbr90CD.6Ej3hSgeHqudpp34K'),
+(13, 'dasdasdasd', 'dguerramoru234324no@gmail.com', '605930289', 'barber', 'marcdps', '$2b$10$XVO4kKtZN1.HMmVq5oVQWed0bRZQWdOo4Q66YWgGr.sTNj97YZQ7a'),
+(15, 'sasadasdas', '2334412@gmail.com', '605930289', 'client', 'dguerratest', '$2b$10$94hbYIStCEaAAAF427dTjeRvvknRbaaSuelD6BbPvzT146g4RX09q'),
+(16, 'Alejandro', 'ale@gmail.com', '605930289', 'barber', 'sdasdadsasd', '$2b$10$FjCPZiSKJ3RE7Y/ddkWcSeZoYNUQYJTLF3tLBOwGttppK7P8miMFe'),
+(17, 'sdasdasd', 'asdasd@gmail.com', '605930218', 'client', 'testing', '$2b$10$55o6hhXiu7Wf0tVs8dvaf.wpiym3tLXwGjnQrUMBFaRD9LGA6XnkC'),
+(19, 'sdasdasd', 'asda321312sd@gmail.com', '605930218', 'client', 'testing', '$2b$10$LUzb6SMNBuHn.ZtmfP3olu03jnLVW3R0lvC3SzpNr.4ytAHJneYy2');
 
 --
 -- Índices para tablas volcadas
@@ -110,7 +121,8 @@ ALTER TABLE `reservations`
 -- Indices de la tabla `styles`
 --
 ALTER TABLE `styles`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id` (`id`);
 
 --
 -- Indices de la tabla `users`
@@ -127,13 +139,19 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT de la tabla `reservations`
 --
 ALTER TABLE `reservations`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+
+--
+-- AUTO_INCREMENT de la tabla `styles`
+--
+ALTER TABLE `styles`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT de la tabla `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- Restricciones para tablas volcadas
